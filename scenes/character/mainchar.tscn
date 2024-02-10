@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" path="res://scenes/character/mainChar.gd" id="1_jpglg"]
 [ext_resource type="Texture2D" uid="uid://jrw2x4iog6o6" path="res://scenes/character/assets/images/basic_char.png" id="2_nqj0q"]
-[ext_resource type="Texture2D" uid="uid://bc24t0f3k1dg6" path="res://scenes/character/assets/images/gun.png" id="3_5yuqc"]
+[ext_resource type="PackedScene" uid="uid://ytl4lssm2ft7" path="res://scenes/guns/gun.tscn" id="3_ocaqi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("GunSprite")]
+[node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_jpglg")
-GunSprite = NodePath("Gun")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vwdvw")
@@ -20,7 +19,4 @@ texture = ExtResource("2_nqj0q")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="Gun" type="Sprite2D" parent="."]
-position = Vector2(39, -22)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("3_5yuqc")
+[node name="PlayerGun" parent="." instance=ExtResource("3_ocaqi")]

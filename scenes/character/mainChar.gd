@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
-
 var gun_distance_from_player = 50
 
 @export var GunSprite: Sprite2D
+
 @export var movement_speed: float = 150.0
 @export var acceleration: float = 800.0
 @export var deceleration: float = 1200.0
 @export var max_velocity: float = 200.0
+
+@onready var Gun = $PlayerGun
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/acceleration/deceleration.
@@ -27,7 +29,7 @@ func _physics_process(delta):
 	
 	var mouse_pos = get_global_mouse_position()
 	var angle_to_mouse = (mouse_pos - global_position).angle()
-	#angle_to_mouse = PI
 	
-	GunSprite.global_position = global_position + Vector2(cos(angle_to_mouse), sin(angle_to_mouse)) * gun_distance_from_player
-	GunSprite.look_at(global_position)
+
+	Gun.global_position = global_position + Vector2(cos(angle_to_mouse), sin(angle_to_mouse)) * gun_distance_from_player
+	Gun.look_at(global_position)
