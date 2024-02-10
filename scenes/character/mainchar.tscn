@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdv3cai5ckpty"]
+
+[ext_resource type="Script" path="res://scenes/character/mainChar.gd" id="1_wtb7y"]
+[ext_resource type="Texture2D" uid="uid://jrw2x4iog6o6" path="res://scenes/character/assets/images/basic_char.png" id="2_nqj0q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_wtb7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vwdvw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_nqj0q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

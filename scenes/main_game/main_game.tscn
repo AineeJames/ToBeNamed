@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1mlg4bjr8sat"]
+
+[ext_resource type="PackedScene" uid="uid://djbg4wm6jn0br" path="res://scenes/map/first_map/first_map.tscn" id="1_devua"]
+[ext_resource type="PackedScene" uid="uid://bdv3cai5ckpty" path="res://scenes/character/mainchar.tscn" id="1_xd0xi"]
+
+[node name="MainGame" type="Node2D"]
+
+[node name="FirstMap" parent="." instance=ExtResource("1_devua")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_xd0xi")]
