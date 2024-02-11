@@ -1,4 +1,7 @@
-extends CharacterBody2D
+extends Area2D
+
+var velocity: Vector2 = Vector2(0,0)
+var speed = 20
 
 func _ready():
 	# Create a new Timer node.
@@ -19,4 +22,8 @@ func _on_timer_timeout():
 	queue_free()
 
 func _physics_process(delta):
-	move_and_collide(velocity)
+	global_position += velocity * delta * speed
+
+
+func _on_body_entered(body):
+	print("entered Thingy")
