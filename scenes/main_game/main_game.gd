@@ -12,6 +12,7 @@ func spawn_enemy():
 	var enemy = enemy_scene.instantiate()
 	enemy.position = spawn_position
 	add_child(enemy)
+	enemy.add_target(player)
 	#enemy.move_towards_player(player.position) # You'll implement this in your enemy script
 
 
