@@ -3,7 +3,7 @@ extends CharacterBody2D
 var speed: float = 100.0
 
 var Target: CharacterBody2D
-
+var Health: int = 100
 func add_target(target):
 	Target = target
 
@@ -17,3 +17,8 @@ func _physics_process(delta):
 	# Optional: Adjust the character's rotation to face the direction of movement
 	# Comment out the next line if you don't want the character to rotate
 	rotation = direction_to_center.angle()	
+
+func TakeDamage(damage):
+	Health -= damage
+	if Health < 0:
+		queue_free()

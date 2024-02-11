@@ -2,6 +2,7 @@ extends Area2D
 
 var velocity: Vector2 = Vector2(0,0)
 var speed = 20
+var damage_amt = 10
 
 func _ready():
 	# Create a new Timer node.
@@ -26,4 +27,11 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	print("entered Thingy")
+	if body.is_in_group("enemy"):
+		print("entered enemy")
+		if body.has_method("TakeDamage"):
+			body.TakeDamage(damage_amt)
+		else:
+			print("need to implement take damage for node", body.name)
+	else:
+		print("entered non enemy")
