@@ -1,10 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1mlg4bjr8sat"]
+[gd_scene load_steps=5 format=3 uid="uid://c1mlg4bjr8sat"]
 
+[ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_0yqis"]
 [ext_resource type="PackedScene" uid="uid://djbg4wm6jn0br" path="res://scenes/map/first_map/first_map.tscn" id="1_jpbu3"]
 [ext_resource type="PackedScene" uid="uid://bdv3cai5ckpty" path="res://scenes/character/mainchar.tscn" id="2_qrdxn"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cf176"]
+vertices = PackedVector2Array(1201, -34, 1240, 748, 365, 754, 804, -32, -85, -43, -83, 773)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-96, -54, 804, -42, 1211, -45, 1251, 758, 365, 764, -93, 784)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
 [node name="MainGame" type="Node2D"]
+script = ExtResource("1_0yqis")
 
 [node name="FirstMap" parent="." instance=ExtResource("1_jpbu3")]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_qrdxn")]
+[node name="Player" parent="." instance=ExtResource("2_qrdxn")]
+
+[node name="EnemyTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_cf176")
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
