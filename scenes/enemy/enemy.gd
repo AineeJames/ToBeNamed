@@ -21,4 +21,5 @@ func _physics_process(delta):
 func TakeDamage(damage):
 	Health -= damage
 	if Health < 0:
+		print("Enemy DIED")
 		queue_free()
