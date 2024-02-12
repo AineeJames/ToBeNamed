@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcleq7b1cwms"]
+[gd_scene load_steps=5 format=3 uid="uid://bcleq7b1cwms"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_0ehme"]
 [ext_resource type="Texture2D" uid="uid://d2ax0bpbwghbu" path="res://scenes/enemy/enemy1.png" id="2_uks33"]
+[ext_resource type="PackedScene" uid="uid://da2lmud7fdd3p" path="res://scenes/health_bar/health_bar.tscn" id="3_5ak2q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ajq2a"]
 
@@ -16,5 +17,8 @@ texture = ExtResource("2_uks33")
 shape = SubResource("CircleShape2D_ajq2a")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="HealthBar" parent="." instance=ExtResource("3_5ak2q")]
+position = Vector2(0, -37)
 
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]

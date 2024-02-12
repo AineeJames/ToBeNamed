@@ -5,7 +5,15 @@ var speed: float = 100.0
 var Target: CharacterBody2D
 var Health: int = 100
 
+@onready var HealthBarLabel = $HealthBar/VBoxContainer/Label
+@onready var HealthBar = $HealthBar/VBoxContainer/ProgressBar
+
 signal take_damage(amount)
+
+func _ready():
+	HealthBarLabel.text = "Enemy"
+	HealthBar.max_value = Health
+	HealthBar.value = Health
 
 func add_target(target):
 	Target = target
@@ -23,6 +31,7 @@ func _physics_process(delta):
 
 func _on_take_damage(amount):
 	Health -= amount
+	HealthBar.value = Health
 	if Health < 0:
 		print("Enemy DIED")
 		queue_free()

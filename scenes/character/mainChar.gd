@@ -23,7 +23,7 @@ func _physics_process(delta):
 	if ydirection:
 		velocity.y = move_toward(velocity.y, ydirection * max_velocity, acceleration * delta)
 	else:
-		velocity.y = move_toward(velocity.y, 0, deceleration * delta)    
+		velocity.y = move_toward(velocity.y, 0, deceleration * delta)
 
 	move_and_slide()
 	
