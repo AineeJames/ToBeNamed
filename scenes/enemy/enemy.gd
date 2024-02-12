@@ -5,10 +5,13 @@ var speed: float = 100.0
 var Target: CharacterBody2D
 var Health: int = 100
 
+@export var bump_factor: float = 5.0
+
 @onready var HealthBarLabel = $HealthBar/VBoxContainer/Label
 @onready var HealthBar = $HealthBar/VBoxContainer/ProgressBar
+@onready var Sprite = $Sprite2D
 
-signal take_damage(amount)
+signal take_damage(amount, bump_direction)
 
 func _ready():
 	HealthBarLabel.text = "Enemy"
@@ -29,9 +32,19 @@ func _physics_process(delta):
 	# Comment out the next line if you don't want the character to rotate
 	#rotation = direction_to_center.angle()	
 
-func _on_take_damage(amount):
+func _on_take_damage(amount, bump_direction):
 	Health -= amount
 	HealthBar.value = Health
-	if Health < 0:
+	velocity = bump_direction
+	if Health > 0:
+		
+		var bump_vector = bump_direction * bump_factor
+		var tween = get_tree().create_tween()
+		tween.parallel().tween_property(self, "position", position + bump_vector, 0.1).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(Sprite, "modulate", Color.PALE_VIOLET_RED, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(Sprite, "modulate", Color.WHITE, 0.1).set_trans(Tween.TRANS_QUAD)
+		
+	
+	else:
 		print("Enemy DIED")
 		queue_free()

@@ -25,9 +25,9 @@ func _on_timer_timeout():
 func _physics_process(delta):
 	global_position += velocity * delta * speed
 
-
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
-		body.emit_signal("take_damage", damage_amt)
+		queue_free()
+		body.emit_signal("take_damage", damage_amt, velocity.normalized())
 	else:
 		print("entered non enemy")

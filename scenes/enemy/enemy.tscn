@@ -4,17 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://d2ax0bpbwghbu" path="res://scenes/enemy/enemy1.png" id="2_uks33"]
 [ext_resource type="PackedScene" uid="uid://da2lmud7fdd3p" path="res://scenes/health_bar/health_bar.tscn" id="3_5ak2q"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ajq2a"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_er3cj"]
+height = 44.0
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_0ehme")
+bump_factor = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("2_uks33")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ajq2a")
+position = Vector2(-2, 0)
+shape = SubResource("CapsuleShape2D_er3cj")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
