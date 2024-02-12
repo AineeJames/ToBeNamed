@@ -4,6 +4,9 @@ var speed: float = 100.0
 
 var Target: CharacterBody2D
 var Health: int = 100
+
+signal take_damage(amount)
+
 func add_target(target):
 	Target = target
 
@@ -16,10 +19,10 @@ func _physics_process(delta):
 
 	# Optional: Adjust the character's rotation to face the direction of movement
 	# Comment out the next line if you don't want the character to rotate
-	rotation = direction_to_center.angle()	
+	#rotation = direction_to_center.angle()	
 
-func TakeDamage(damage):
-	Health -= damage
+func _on_take_damage(amount):
+	Health -= amount
 	if Health < 0:
 		print("Enemy DIED")
 		queue_free()

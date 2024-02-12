@@ -28,10 +28,6 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
-		print("entered enemy")
-		if body.has_method("TakeDamage"):
-			body.TakeDamage(damage_amt)
-		else:
-			print("need to implement take damage for node", body.name)
+		body.emit_signal("take_damage", damage_amt)
 	else:
 		print("entered non enemy")

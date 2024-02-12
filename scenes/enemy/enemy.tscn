@@ -16,3 +16,5 @@ texture = ExtResource("2_uks33")
 shape = SubResource("CircleShape2D_ajq2a")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="take_damage" from="." to="." method="_on_take_damage"]
