@@ -4,12 +4,16 @@ var speed: float = 100.0
 
 var Target: CharacterBody2D
 var Health: int = 100
+var dying = false
 
 @export var bump_factor: float = 5.0
 
 @onready var HealthBarLabel = $HealthBar/VBoxContainer/Label
 @onready var HealthBar = $HealthBar/VBoxContainer/ProgressBar
 @onready var Sprite = $Sprite2D
+@onready var CollisionShape = $CollisionShape2D
+
+var BloodParticles = load("res://scenes/particles/blood_particles.tscn")
 
 signal take_damage(amount, bump_direction)
 
@@ -26,25 +30,36 @@ func _physics_process(delta):
 	var move_vector = direction_to_center * speed * delta
 	# If the character is a KinematicBody2D, use move_and_slide() or move_and_collide()
 	# If it's another type of Node2D, you might directly adjust the position
-	position += move_vector
+	if not dying:
+		position += move_vector
 
-	# Optional: Adjust the character's rotation to face the direction of movement
+	# Optional: Adjust the character's rotation to face the direction of movementas
 	# Comment out the next line if you don't want the character to rotate
-	#rotation = direction_to_center.angle()	
+	# rotation = direction_to_center.angle()		
 
 func _on_take_damage(amount, bump_direction):
 	Health -= amount
 	HealthBar.value = Health
-	velocity = bump_direction
-	if Health > 0:
-		
-		var bump_vector = bump_direction * bump_factor
-		var tween = get_tree().create_tween()
-		tween.parallel().tween_property(self, "position", position + bump_vector, 0.1).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-		tween.parallel().tween_property(Sprite, "modulate", Color.PALE_VIOLET_RED, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tween.tween_property(Sprite, "modulate", Color.WHITE, 0.1).set_trans(Tween.TRANS_QUAD)
-		
 	
-	else:
+	var blood_instance = BloodParticles.instantiate()
+	blood_instance.global_position = global_position
+	blood_instance.emitting = true
+	blood_instance.direction = bump_direction
+	get_tree().current_scene.add_child(blood_instance)
+	
+	var bump_vector = bump_direction * bump_factor
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(self, "position", position + bump_vector, 0.1).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(Sprite, "modulate", Color.PALE_VIOLET_RED, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(Sprite, "modulate", Color.WHITE, 0.1).set_trans(Tween.TRANS_QUAD)
+	
+	if Health <= 0:
+		CollisionShape.disabled = true;
+		dying = true
+		HealthBar.visible = false
+		HealthBarLabel.visible = false
+		tween = get_tree().create_tween()
+		tween.parallel().tween_property(Sprite, "modulate", Color.TRANSPARENT, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_callback(queue_free)
 		print("Enemy DIED")
-		queue_free()
+

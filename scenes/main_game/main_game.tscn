@@ -18,6 +18,7 @@ script = ExtResource("1_0yqis")
 [node name="Player" parent="." instance=ExtResource("2_qrdxn")]
 
 [node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 2.5
 autostart = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]

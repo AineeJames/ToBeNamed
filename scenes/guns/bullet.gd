@@ -2,7 +2,7 @@ extends Area2D
 
 var velocity: Vector2 = Vector2(0,0)
 var speed = 20
-var damage_amt = 10
+var damage_amt = 25
 
 func _ready():
 	# Create a new Timer node.
