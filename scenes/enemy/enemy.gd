@@ -24,9 +24,17 @@ const monsterNames = [
 	"Bob"
 ]
 
+const monsterDescriptors = [
+	"Big",
+	"Angry",
+	"Slow",
+	"Crazy"
+]
+
 func _ready():
 	var name = monsterNames[randi() % monsterNames.size()]
-	HealthBar.set_label(name)
+	var desc = monsterDescriptors[randi() % monsterDescriptors.size()]
+	HealthBar.set_label("%s %s" % [desc, name])
 	HealthBar.set_max_health(Health)
 	HealthBar.set_health(Health)
 
