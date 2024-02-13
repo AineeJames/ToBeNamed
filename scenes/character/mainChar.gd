@@ -17,6 +17,7 @@ var player_can_dash = true
 @onready var Gun = $PlayerGun
 @onready var PlayerSprite = $PlayerSprite
 @onready var DashTimer = $DashTimer
+@onready var PlayerCollision = $CollisionShape2D
 
 func _ready():
 	player_initial_scale = PlayerSprite.scale
@@ -37,6 +38,7 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("dash") and player_can_dash:
 		player_can_dash = false
+		PlayerCollision.disabled = true
 		
 		var new_velocity = (velocity * dash_multiplyer).clamp(-Vector2(max_velocity, max_velocity), Vector2(max_velocity, max_velocity))
 		var new_scale = (PlayerSprite.scale - (abs(new_velocity) / (max_velocity * 1.2) * PlayerSprite.scale)).clamp(Vector2.ZERO, Vector2.ONE)
@@ -44,7 +46,10 @@ func _physics_process(delta):
 		var tween = get_tree().create_tween()
 		tween.parallel().tween_property(self, "velocity", new_velocity, 0.1).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		tween.parallel().tween_property(PlayerSprite, "scale", new_scale, 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(PlayerSprite, "modulate", Color(0, 0, 0, 0.2), 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		tween.tween_property(PlayerSprite, "scale", player_initial_scale, 0.20).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		tween.parallel().tween_property(PlayerSprite, "modulate", Color.WHITE, 0.20).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		tween.tween_callback(func(): PlayerCollision.disabled = false)
 		
 		DashTimer.start()
 		
