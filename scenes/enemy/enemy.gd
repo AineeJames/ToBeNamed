@@ -48,7 +48,8 @@ func _physics_process(delta):
 	# If the character is a KinematicBody2D, use move_and_slide() or move_and_collide()
 	# If it's another type of Node2D, you might directly adjust the position
 	if not dying:
-		position += move_vector
+		move_and_collide(move_vector)
+		# TODO: need the guys to not get stuck on each other
 
 	# Optional: Adjust the character's rotation to face the direction of movementas
 	# Comment out the next line if you don't want the character to rotate
