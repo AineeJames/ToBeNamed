@@ -5,7 +5,9 @@ var Bullet = load("res://scenes/guns/bullet.tscn")
 @export var gun_kick: float = 10.0
 @export var movement_influence: float = 0.002
 @export var projectile_speed: float = 20
+@export var crit_percentage: int = 50
 @export var is_ai_gun: bool = false
+
 var velocity = 0
 var prev_position: Vector2
 
@@ -28,6 +30,7 @@ func fire_bullet():
 	instance.global_position = global_position
 	instance.rotation = rotation
 	instance.velocity = velocity * movement_influence + Vector2(projectile_speed*cos(rotation + PI), projectile_speed*sin(rotation + PI))
+	instance.crit = randi_range(0, 100) < crit_percentage
 	get_tree().current_scene.add_child(instance)
 	
 func _input(event):
