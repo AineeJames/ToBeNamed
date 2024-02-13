@@ -30,4 +30,4 @@ func _on_body_entered(body):
 		var damage_amt = randi_range(10, 30)
 		body.emit_signal("take_damage", damage_amt, velocity.normalized())
 	else:
-		print("entered non enemy")
+		pass

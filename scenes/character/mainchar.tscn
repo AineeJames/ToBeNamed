@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdv3cai5ckpty"]
+[gd_scene load_steps=6 format=3 uid="uid://bdv3cai5ckpty"]
 
 [ext_resource type="Script" path="res://scenes/character/mainChar.gd" id="1_jpglg"]
 [ext_resource type="Texture2D" uid="uid://jrw2x4iog6o6" path="res://scenes/character/assets/images/basic_char.png" id="2_nqj0q"]
 [ext_resource type="PackedScene" uid="uid://ytl4lssm2ft7" path="res://scenes/guns/gun.tscn" id="3_ocaqi"]
+[ext_resource type="PackedScene" uid="uid://dgygcjgr0c380" path="res://scenes/minion/minion.tscn" id="4_3ll4i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
 
@@ -22,5 +23,8 @@ zoom = Vector2(2, 2)
 [node name="PlayerGun" parent="." instance=ExtResource("3_ocaqi")]
 
 [node name="DashTimer" type="Timer" parent="."]
+
+[node name="Minion" parent="." instance=ExtResource("4_3ll4i")]
+position = Vector2(-78, 15)
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
