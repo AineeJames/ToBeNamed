@@ -8,19 +8,18 @@ var dying = false
 
 @export var bump_factor: float = 5.0
 
-@onready var HealthBarLabel = $HealthBar/VBoxContainer/Label
-@onready var HealthBar = $HealthBar/VBoxContainer/ProgressBar
 @onready var Sprite = $Sprite2D
 @onready var CollisionShape = $CollisionShape2D
+@onready var HealthBar = $HealthBar
 
 var BloodParticles = load("res://scenes/particles/blood_particles.tscn")
 
 signal take_damage(amount, bump_direction)
 
 func _ready():
-	HealthBarLabel.text = "Enemy"
-	HealthBar.max_value = Health
-	HealthBar.value = Health
+	HealthBar.set_label("Enemy")
+	HealthBar.set_max_health(Health)
+	HealthBar.set_health(Health)
 
 func add_target(target):
 	Target = target
@@ -39,7 +38,7 @@ func _physics_process(delta):
 
 func _on_take_damage(amount, bump_direction):
 	Health -= amount
-	HealthBar.value = Health
+	HealthBar.set_health(Health)
 	
 	var blood_instance = BloodParticles.instantiate()
 	blood_instance.global_position = global_position
@@ -57,7 +56,6 @@ func _on_take_damage(amount, bump_direction):
 		CollisionShape.disabled = true;
 		dying = true
 		HealthBar.visible = false
-		HealthBarLabel.visible = false
 		tween = get_tree().create_tween()
 		tween.parallel().tween_property(Sprite, "modulate", Color.TRANSPARENT, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		tween.tween_callback(queue_free)

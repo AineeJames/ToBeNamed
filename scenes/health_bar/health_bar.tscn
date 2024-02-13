@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://da2lmud7fdd3p"]
+[gd_scene load_steps=5 format=3 uid="uid://da2lmud7fdd3p"]
 
 [ext_resource type="Script" path="res://scenes/health_bar/health_bar.gd" id="1_b3rpa"]
+[ext_resource type="Texture2D" uid="uid://btv8j8nlwvn1p" path="res://scenes/health_bar/assets/textures/over.png" id="2_5mwp0"]
+[ext_resource type="Texture2D" uid="uid://og7mq8rqi052" path="res://scenes/health_bar/assets/textures/under.png" id="2_msdrt"]
+[ext_resource type="Texture2D" uid="uid://bjnedme8fgiv7" path="res://scenes/health_bar/assets/textures/progress.png" id="3_5j5bq"]
 
 [node name="HealthBar" type="Node2D"]
 script = ExtResource("1_b3rpa")
@@ -25,14 +28,18 @@ alignment = 1
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Gabagooman"
+text = "Monster Name"
 horizontal_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
-step = 1.0
-value = 30.0
-show_percentage = false
+
+[node name="ProgressBar" type="TextureProgressBar" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("2_msdrt")
+texture_over = ExtResource("2_5mwp0")
+texture_progress = ExtResource("3_5j5bq")
 
 [connection signal="timeout" from="VisibilityTimer" to="." method="_on_visibility_timer_timeout"]
-[connection signal="value_changed" from="VBoxContainer/ProgressBar" to="." method="_on_progress_bar_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/CenterContainer/ProgressBar" to="." method="_on_progress_bar_value_changed"]

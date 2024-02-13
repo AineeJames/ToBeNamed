@@ -5,7 +5,8 @@ extends Node2D
 
 @onready var VisibilityTimer = $VisibilityTimer
 @onready var Info = $VBoxContainer
-@onready var HealthBar = $VBoxContainer/ProgressBar
+@onready var HealthBar = $VBoxContainer/CenterContainer/ProgressBar
+@onready var NameLabel = $VBoxContainer/Label
 
 func _physics_process(delta):
 	if VisibilityTimer.time_left < health_bar_fade_time:
@@ -20,4 +21,13 @@ func _on_progress_bar_value_changed(value):
 	if value < HealthBar.max_value:
 		visible = true
 		VisibilityTimer.start(health_bar_visibility_time)
+	
+func set_max_health(value):
+	HealthBar.max_value = value
+	
+func set_health(value):
+	HealthBar.value = value
+	
+func set_label(str):
+	NameLabel.text = str
 	
