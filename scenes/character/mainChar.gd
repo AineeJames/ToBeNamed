@@ -1,34 +1,53 @@
 extends CharacterBody2D
 
 @export var gun_distance_from_player = 35
+@export var dash_multiplyer = 3
 var angle_of_gun = 0
+var player_initial_scale
+var player_can_dash = true
 
 @export var GunSprite: Sprite2D
 
 @export var movement_speed: float = 150.0
 @export var acceleration: float = 800.0
 @export var deceleration: float = 1200.0
-@export var max_velocity: float = 200.0
+@export var max_walk_velocity: float = 200
+@export var max_velocity: float = 400
 
 @onready var Gun = $PlayerGun
+@onready var PlayerSprite = $PlayerSprite
+@onready var DashTimer = $DashTimer
+
+func _ready():
+	player_initial_scale = PlayerSprite.scale
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/acceleration/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
-		velocity.x = move_toward(velocity.x, direction * max_velocity, acceleration * delta)
+		velocity.x = move_toward(velocity.x, direction * max_walk_velocity, acceleration * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 
 	var ydirection = Input.get_axis("move_up", "move_down")
 	if ydirection:
-		velocity.y = move_toward(velocity.y, ydirection * max_velocity, acceleration * delta)
+		velocity.y = move_toward(velocity.y, ydirection * max_walk_velocity, acceleration * delta)
 	else:
 		velocity.y = move_toward(velocity.y, 0, deceleration * delta)
 		
-	if Input.is_action_just_pressed("dash"):
-		velocity.x = move_toward(velocity.x, velocity.x * 5, acceleration * delta * 25)
-		velocity.y = move_toward(velocity.y, velocity.y * 5, acceleration * delta * 25)
+	if Input.is_action_just_pressed("dash") and player_can_dash:
+		player_can_dash = false
+		
+		var new_velocity = (velocity * dash_multiplyer).clamp(-Vector2(max_velocity, max_velocity), Vector2(max_velocity, max_velocity))
+		var new_scale = (PlayerSprite.scale - (abs(new_velocity) / (max_velocity * 1.2) * PlayerSprite.scale)).clamp(Vector2.ZERO, Vector2.ONE)
+		new_scale = Vector2(new_scale.y, new_scale.x)
+		var tween = get_tree().create_tween()
+		tween.parallel().tween_property(self, "velocity", new_velocity, 0.1).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(PlayerSprite, "scale", new_scale, 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		tween.tween_property(PlayerSprite, "scale", player_initial_scale, 0.20).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		
+		DashTimer.start()
+		
 
 	move_and_slide()
 	
@@ -44,3 +63,7 @@ func _physics_process(delta):
 
 	Gun.global_position = global_position + Vector2(cos(angle_of_gun), sin(angle_of_gun)) * gun_distance_from_player
 	Gun.look_at(global_position)
+
+
+func _on_dash_timer_timeout():
+	player_can_dash = true

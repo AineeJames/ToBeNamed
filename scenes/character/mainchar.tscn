@@ -12,7 +12,7 @@ script = ExtResource("1_jpglg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vwdvw")
 
-[node name="Guy" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_nqj0q")
 
@@ -20,3 +20,7 @@ texture = ExtResource("2_nqj0q")
 zoom = Vector2(3, 3)
 
 [node name="PlayerGun" parent="." instance=ExtResource("3_ocaqi")]
+
+[node name="DashTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
