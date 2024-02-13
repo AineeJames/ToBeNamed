@@ -16,8 +16,17 @@ var BloodParticles = load("res://scenes/particles/blood_particles.tscn")
 
 signal take_damage(amount, bump_direction)
 
+const monsterNames = [
+	"Sharon",
+	"Daniel",
+	"Darnell",
+	"Ronnie",
+	"Bob"
+]
+
 func _ready():
-	HealthBar.set_label("Enemy")
+	var name = monsterNames[randi() % monsterNames.size()]
+	HealthBar.set_label(name)
 	HealthBar.set_max_health(Health)
 	HealthBar.set_health(Health)
 
@@ -59,5 +68,4 @@ func _on_take_damage(amount, bump_direction):
 		tween = get_tree().create_tween()
 		tween.parallel().tween_property(Sprite, "modulate", Color.TRANSPARENT, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		tween.tween_callback(queue_free)
-		print("Enemy DIED")
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://da2lmud7fdd3p"]
+[gd_scene load_steps=6 format=3 uid="uid://da2lmud7fdd3p"]
 
 [ext_resource type="Script" path="res://scenes/health_bar/health_bar.gd" id="1_b3rpa"]
 [ext_resource type="Texture2D" uid="uid://btv8j8nlwvn1p" path="res://scenes/health_bar/assets/textures/over.png" id="2_5mwp0"]
+[ext_resource type="FontFile" uid="uid://dplpohbesep78" path="res://global_assets/fonts/Pixeled.ttf" id="2_5rsmk"]
 [ext_resource type="Texture2D" uid="uid://og7mq8rqi052" path="res://scenes/health_bar/assets/textures/under.png" id="2_msdrt"]
 [ext_resource type="Texture2D" uid="uid://bjnedme8fgiv7" path="res://scenes/health_bar/assets/textures/progress.png" id="3_5j5bq"]
 
@@ -27,7 +28,8 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("2_5rsmk")
+theme_override_font_sizes/font_size = 5
 text = "Monster Name"
 horizontal_alignment = 1
 
