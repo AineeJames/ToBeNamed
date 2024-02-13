@@ -77,12 +77,15 @@ func _physics_process(delta):
 	if not dying:
 		move_and_slide()
 
-func _on_take_damage(amount, bump_direction):
+func _on_take_damage(amount, bump_direction, crit):
+	
+	if crit:
+		amount = amount * 2
 	
 	var damagestat_instance = DamageStat.instantiate()
 	damagestat_instance.global_position = global_position
 	get_tree().current_scene.add_child(damagestat_instance)
-	damagestat_instance.emit_damage(amount)
+	damagestat_instance.emit_damage(amount, crit)
 	
 	Health -= amount
 	HealthBar.set_health(Health)
