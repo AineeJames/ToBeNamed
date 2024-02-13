@@ -3,6 +3,17 @@ extends Node2D
 var Bullet = load("res://scenes/guns/bullet.tscn")
 
 @export var gun_kick: float = 10.0
+@export var movement_influence: float = 0.002
+@export var projectile_speed: float = 20
+var velocity = 0
+var prev_position: Vector2
+
+func _ready():
+	prev_position = global_position
+
+func _physics_process(delta):
+	velocity = (global_position- prev_position) / delta
+	prev_position = global_position
 
 func _input(event):
 	if event.is_action_pressed("fire"):
@@ -17,5 +28,5 @@ func _input(event):
 		var instance = Bullet.instantiate()
 		instance.global_position = global_position
 		instance.rotation = rotation
-		instance.velocity = Vector2(10*cos(rotation + PI), 10*sin(rotation + PI))
+		instance.velocity = velocity * movement_influence + Vector2(projectile_speed*cos(rotation + PI), projectile_speed*sin(rotation + PI))
 		get_tree().current_scene.add_child(instance)
