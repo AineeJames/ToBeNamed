@@ -2,7 +2,6 @@ extends Area2D
 
 var velocity: Vector2 = Vector2(0,0)
 var speed = 20
-var damage_amt = 25
 
 func _ready():
 	# Create a new Timer node.
@@ -28,6 +27,7 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
 		queue_free()
+		var damage_amt = randi_range(10, 30)
 		body.emit_signal("take_damage", damage_amt, velocity.normalized())
 	else:
 		print("entered non enemy")

@@ -12,7 +12,8 @@ var dying = false
 @onready var CollisionShape = $CollisionShape2D
 @onready var HealthBar = $HealthBar
 
-var BloodParticles = load("res://scenes/particles/blood_particles.tscn")
+var BloodParticles = load("res://scenes/particles/blood/blood_particles.tscn")
+var DamageStat = load("res://scenes/particles/damage_stat/damage_stat.tscn")
 
 signal take_damage(amount, bump_direction)
 
@@ -54,6 +55,12 @@ func _physics_process(delta):
 	# rotation = direction_to_center.angle()		
 
 func _on_take_damage(amount, bump_direction):
+	
+	var damagestat_instance = DamageStat.instantiate()
+	damagestat_instance.global_position = global_position
+	get_tree().current_scene.add_child(damagestat_instance)
+	damagestat_instance.emit_damage(amount)
+	
 	Health -= amount
 	HealthBar.set_health(Health)
 	
