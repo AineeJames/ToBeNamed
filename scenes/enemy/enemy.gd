@@ -63,19 +63,19 @@ func _physics_process(delta):
 	# Optional: Adjust the character's rotation to face the direction of movementas
 	# Comment out the next line if you don't want the character to rotate
 	# rotation = direction_to_center.angle()		
-	
-	movement_delta = speed * delta
-	
-	var current_agent_position = global_position
-	var next_path_position = NavAgent.get_next_path_position()
-	#velocity = (next_path_position - current_agent_position).normalized() * movement_delta
-	var new_velocity: Vector2 = global_position.direction_to(next_path_position) * movement_delta
-	if NavAgent.avoidance_enabled:
-		NavAgent.set_velocity(new_velocity)
-	else:
-		_on_velocity_computed(new_velocity)
-	if not dying:
-		move_and_slide()
+	if !NavAgent.is_navigation_finished():
+		movement_delta = speed * delta
+		
+		var current_agent_position = global_position
+		var next_path_position = NavAgent.get_next_path_position()
+		#velocity = (next_path_position - current_agent_position).normalized() * movement_delta
+		var new_velocity: Vector2 = global_position.direction_to(next_path_position) * movement_delta
+		if NavAgent.avoidance_enabled:
+			NavAgent.set_velocity(new_velocity)
+		else:
+			_on_velocity_computed(new_velocity)
+		if not dying:
+			move_and_slide()
 
 func _on_take_damage(amount, bump_direction):
 	
