@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 100.0
-
+@export var max_speed: Vector2 = Vector2(100,100)
 var Target: CharacterBody2D
 var Health: int = 100
 var dying = false
@@ -42,8 +42,6 @@ func _ready():
 	NavAgent.velocity_computed.connect(Callable(_on_velocity_computed))
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
-	#print("Got velocity computed")
-	print(safe_velocity)
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
 func add_target(target):
