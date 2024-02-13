@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bdv3cai5ckpty" path="res://scenes/character/mainchar.tscn" id="2_qrdxn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cf176"]
-vertices = PackedVector2Array(1201, -34, 1240, 748, 365, 754, 804, -32, -85, -43, -83, 773)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-96, -54, 804, -42, 1211, -45, 1251, 758, 365, 764, -93, 784)])
+vertices = PackedVector2Array(508, -981, 512, -982, 3255, -1145, 2100, 1879, 498, 1986, -1037, 1861, -1218, -951)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(0, 5, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1307, -1034, 507, -1065, 3380, -1236, 2160, 1959, 497, 2070, -1116, 1939)])
 source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 83.64
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_0yqis")
@@ -16,12 +17,14 @@ script = ExtResource("1_0yqis")
 [node name="FirstMap" parent="." instance=ExtResource("1_jpbu3")]
 
 [node name="Player" parent="." instance=ExtResource("2_qrdxn")]
+position = Vector2(658, 310)
 
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 2.5
 autostart = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(0, -2)
 navigation_polygon = SubResource("NavigationPolygon_cf176")
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
