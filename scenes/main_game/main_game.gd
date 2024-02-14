@@ -4,6 +4,9 @@ extends Node2D
 var enemy_scene = load("res://scenes/enemy/enemy.tscn")
 
 var default_enemy_resource: EnemyResource = load("res://scenes/enemy/DefaultEnemy.tres")
+var lobbyist_enemy_resource: EnemyResource = load("res://scenes/enemy/lobbyist/OldWorldLobbyist.tres")
+@export var enemy_resources: Array[EnemyResource]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,7 +15,8 @@ func spawn_enemy():
 	print("Spawning enemy")
 	var spawn_position = pick_spawn_location()
 	var enemy = enemy_scene.instantiate()
-	enemy.resource = default_enemy_resource
+	
+	enemy.resource = enemy_resources.pick_random()
 	enemy.position = spawn_position
 	add_child(enemy)
 	enemy.add_target(player)
