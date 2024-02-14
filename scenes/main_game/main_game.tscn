@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1mlg4bjr8sat"]
+[gd_scene load_steps=7 format=3 uid="uid://c1mlg4bjr8sat"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_0yqis"]
 [ext_resource type="PackedScene" uid="uid://djbg4wm6jn0br" path="res://scenes/map/first_map/first_map.tscn" id="1_jpbu3"]
+[ext_resource type="Resource" uid="uid://6rqte7r57jdq" path="res://scenes/enemy/lobbyist/OldWorldLobbyist.tres" id="2_ipnuw"]
 [ext_resource type="PackedScene" uid="uid://bdv3cai5ckpty" path="res://scenes/character/mainchar.tscn" id="2_qrdxn"]
+[ext_resource type="Resource" uid="uid://dwpsiyhbdlrlq" path="res://scenes/enemy/DefaultEnemy.tres" id="3_qsu5x"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cf176"]
 vertices = PackedVector2Array(508, -981, 512, -982, 3255, -1145, 2100, 1879, 498, 1986, -1037, 1861, -1218, -951)
@@ -13,6 +15,7 @@ agent_radius = 83.64
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_0yqis")
+enemy_resources = Array[Resource("res://scenes/enemy/EnemyResource.gd")]([ExtResource("2_ipnuw"), ExtResource("3_qsu5x")])
 
 [node name="FirstMap" parent="." instance=ExtResource("1_jpbu3")]
 

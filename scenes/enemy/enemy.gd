@@ -46,7 +46,9 @@ func _ready():
 	Health = resource.Health
 	max_speed = Vector2(resource.MaxMoveSpeed,resource.MaxMoveSpeed)
 	Sprite.texture = resource.EnemySprite
-
+	print(Sprite.get_rect().size)
+	HealthBar.move_local_y(-Sprite.texture.get_height()*Sprite.scale.y * .5)
+	
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
