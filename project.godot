@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 GlobalEventBus="*res://global_assets/autoloads/GlobalEventBus.gd"
 
+[display]
+
+window/dpi/allow_hidpi=false
+
 [input]
 
 move_left={

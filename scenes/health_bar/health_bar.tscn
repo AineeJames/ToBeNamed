@@ -47,6 +47,7 @@ texture_over = ExtResource("2_5mwp0")
 texture_progress = ExtResource("3_5j5bq")
 
 [node name="PercentLabel" type="Label" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_5rsmk")
 theme_override_font_sizes/font_size = 10
