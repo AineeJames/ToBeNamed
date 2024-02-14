@@ -13,17 +13,13 @@ var kill_count: int
 var player_crit_count: int
 var seconds_since_start: int
 var timer: Timer
-const dps_rolling_window_len_seconds = 2
+const dps_rolling_window_len_seconds = 5
 const dps_calc_delay = 0.25
 var DpsCalcTimer: Timer
 var damage_per_second: int = 0
 
-
-class DamageEvent:
-	var damage: int
-	var timestamp_sec: int
-
-var DamageQueue: Array[DamageEvent]
+var DamageValues: PackedInt32Array
+var Timestamps: PackedInt32Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,14 +47,20 @@ func _process(delta):
 
 func calc_dps():
 	# remove events no longer in window
-	var current_time = Time.get_ticks_msec() / 1000.0
-	while DamageQueue.size() > 0 and current_time - DamageQueue[0].timestamp_sec > dps_rolling_window_len_seconds:
-		DamageQueue.pop_front()
-		
+	var current_time = int(Time.get_ticks_msec() / 1000.0) # Current time in seconds
+	
+	# Remove events no longer in the DPS window
+	while Timestamps.size() > 0 and current_time - Timestamps[0] > dps_rolling_window_len_seconds:
+		Timestamps.remove_at(0) # Remove the oldest timestamp
+		DamageValues.remove_at(0) # Remove the corresponding damage value
+
+	# Sum up the damage of the remaining events
 	var damage_sum = 0
-	for damage_event in DamageQueue:
-		damage_sum += damage_event.damage
-	damage_per_second = damage_sum / dps_rolling_window_len_seconds
+	for damage in DamageValues:
+		damage_sum += damage
+
+	# Calculate DPS
+	var damage_per_second = damage_sum / float(dps_rolling_window_len_seconds) if Timestamps.size() > 0 else 0.0
 	updated_dps.emit(damage_per_second)
 
 func _on_game_timer_timeout():
@@ -71,10 +73,8 @@ func _on_player_did_crit():
 func _on_did_damage(amount):
 	damage_done += amount
 	var current_time = Time.get_ticks_msec() / 1000.0
-	var event = DamageEvent.new()
-	event.damage = amount
-	event.timestamp_sec = current_time
-	DamageQueue.append(event)
+	DamageValues.append(amount)
+	Timestamps.append(current_time)
 	
 
 func _on_enemy_killed():

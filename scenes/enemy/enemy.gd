@@ -85,9 +85,6 @@ func _physics_process(delta):
 			move_and_slide()
 
 func _on_take_damage(amount, bump_direction, crit):
-	
-	
-	
 	if crit:
 		amount = amount * 2
 	
