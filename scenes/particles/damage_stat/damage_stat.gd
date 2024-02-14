@@ -13,4 +13,6 @@ func emit_damage(val, crit):
 		DamageLabel.add_theme_color_override("font_color", noncrit_color)
 	DamageLabel.text = "-%.01f" % val
 	Particle.emitting = true
-	
+
+func _on_damge_particle_finished():
+	queue_free()
