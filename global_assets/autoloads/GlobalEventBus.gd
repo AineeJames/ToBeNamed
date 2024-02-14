@@ -5,13 +5,15 @@ signal player_did_crit()
 signal enemy_killed()
 
 signal updated_dps(dps)
+signal updated_killcount(killcount)
+signal updated_critcount(critcount)
 
 var damage_done: int
 var kill_count: int
 var player_crit_count: int
 var seconds_since_start: int
 var timer: Timer
-const dps_rolling_window_len_seconds = 5
+const dps_rolling_window_len_seconds = 2
 const dps_calc_delay = 0.25
 var DpsCalcTimer: Timer
 var damage_per_second: int = 0
@@ -64,6 +66,7 @@ func _on_game_timer_timeout():
 
 func _on_player_did_crit():
 	player_crit_count += 1
+	updated_critcount.emit(player_crit_count)
 
 func _on_did_damage(amount):
 	damage_done += amount
@@ -76,3 +79,4 @@ func _on_did_damage(amount):
 
 func _on_enemy_killed():
 	kill_count += 1
+	updated_killcount.emit(kill_count)
