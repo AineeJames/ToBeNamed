@@ -26,13 +26,15 @@ scale = Vector2(0.0721433, 0.0721433)
 
 [node name="BulletsCountLabel" type="Label" parent="Control"]
 layout_mode = 2
-offset_left = -249.503
-offset_top = -471.284
-offset_right = -99.5033
-offset_bottom = -51.284
+offset_left = -332.671
+offset_top = -429.7
+offset_right = -92.6712
+offset_bottom = -149.7
 theme_override_fonts/font = ExtResource("4_wr68r")
-theme_override_font_sizes/font_size = 120
-text = "8"
+theme_override_font_sizes/font_size = 100
+text = "35"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 layout_mode = 1
@@ -52,16 +54,18 @@ size_flags_vertical = 4
 
 [node name="ReloadingProgressBar" type="TextureProgressBar" parent="Control/CenterContainer"]
 layout_mode = 2
+step = 0.01
 value = 50.0
 fill_mode = 5
 texture_progress = ExtResource("3_0lrjl")
-tint_progress = Color(1, 1, 1, 0.52549)
+tint_progress = Color(1, 1, 1, 0.219608)
 
 [node name="ClipBar" type="TextureProgressBar" parent="Control/CenterContainer"]
 layout_mode = 2
 value = 50.0
 fill_mode = 5
 texture_progress = ExtResource("3_0lrjl")
+tint_progress = Color(1, 1, 1, 0.529412)
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]

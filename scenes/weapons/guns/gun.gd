@@ -53,6 +53,7 @@ func _input(event):
 	if bullets_remaining > 0 and event.is_action_pressed("reload"):
 		ReloadingBar.visible = true
 		ClipBar.visible = false
+		bullets_remaining = 0
 		ReloadTimer.start(selected_gun.reload_time)
 	
 	if not selected_gun.automatic and event.is_action_pressed("fire") and bullets_remaining > 0 and can_shoot:
