@@ -9,3 +9,5 @@ class_name EnemyResource
 @export var EnemySprite: Texture
 @export var AttackSound: AudioStream
 @export var AttackRadius: int = 100
+
+# TODO: How can we define collision shapes per enemy?
