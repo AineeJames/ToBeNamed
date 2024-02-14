@@ -69,6 +69,5 @@ func _physics_process(delta):
 	Gun.global_position = global_position + Vector2(cos(angle_of_gun), sin(angle_of_gun)) * gun_distance_from_player
 	Gun.look_at(global_position)
 
-
 func _on_dash_timer_timeout():
 	player_can_dash = true
