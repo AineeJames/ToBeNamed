@@ -4,6 +4,8 @@ signal did_damage(amount)
 signal player_did_crit()
 signal enemy_killed()
 
+signal updated_dps(dps)
+
 var damage_done: int
 var kill_count: int
 var player_crit_count: int
@@ -55,6 +57,7 @@ func calc_dps():
 	for damage_event in DamageQueue:
 		damage_sum += damage_event.damage
 	damage_per_second = damage_sum / dps_rolling_window_len_seconds
+	updated_dps.emit(damage_per_second)
 
 func _on_game_timer_timeout():
 	seconds_since_start += 1
