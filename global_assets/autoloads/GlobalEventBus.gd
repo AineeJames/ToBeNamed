@@ -13,6 +13,7 @@ func _ready():
 	did_damage.connect(_on_did_damage)
 	enemy_killed.connect(_on_enemy_killed)
 	player_did_crit.connect(_on_player_did_crit)
+	
 	damage_done = 0
 	kill_count = 0
 	player_crit_count = 0

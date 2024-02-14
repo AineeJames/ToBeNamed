@@ -89,7 +89,7 @@ func _on_take_damage(amount, bump_direction, crit):
 	get_tree().current_scene.add_child(damagestat_instance)
 	damagestat_instance.emit_damage(amount, crit)
 	
-	var damage_done = clamp(amount,0,Health)
+	
 		
 	Health -= amount
 	HealthBar.set_health(Health)
@@ -106,7 +106,9 @@ func _on_take_damage(amount, bump_direction, crit):
 	tween.parallel().tween_property(Sprite, "modulate", Color.PALE_VIOLET_RED, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(Sprite, "modulate", Color.WHITE, 0.1).set_trans(Tween.TRANS_QUAD)
 	
-	# todo make damage not be more than the health left
+	# send damage done to global event bus
+	# clamp to max of health damage
+	var damage_done = clamp(amount,0,Health)
 	GlobalEventBus.did_damage.emit(damage_done)
 	if Health <= 0:
 		call_deferred("disable_collision")
