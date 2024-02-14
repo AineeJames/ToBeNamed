@@ -16,12 +16,9 @@ func spawn_enemy():
 	enemy.position = spawn_position
 	add_child(enemy)
 	enemy.add_target(player)
-	#enemy.move_towards_player(player.position) # You'll implement this in your enemy script
 
 
 func pick_spawn_location() -> Vector2:
-	# This is a simple example. You might want to customize it.
-	# For 2D, picks a random position off-screen, but you could use player's view for 3D.
 	var viewport_rect = get_viewport_rect()
 	var player_pos = player.global_position
 	var spawn_margin = 100 # Pixels outside the viewport to spawn the enemy
