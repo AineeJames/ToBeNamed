@@ -14,7 +14,7 @@ var player_can_dash = true
 @export var max_walk_velocity: float = 200
 @export var max_velocity: float = 400
 
-@onready var Gun = $PlayerGun
+@onready var Gun = $Gun
 @onready var PlayerSprite = $PlayerSprite
 @onready var DashTimer = $DashTimer
 @onready var PlayerCollision = $CollisionShape2D

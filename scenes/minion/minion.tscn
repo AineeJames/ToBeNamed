@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgygcjgr0c380"]
 
 [ext_resource type="Script" path="res://scenes/minion/minion.gd" id="1_3q2ks"]
-[ext_resource type="PackedScene" uid="uid://ytl4lssm2ft7" path="res://scenes/guns/gun.tscn" id="1_oquvl"]
+[ext_resource type="PackedScene" uid="uid://dofudcbhbj7yc" path="res://scenes/weapons/guns/gun.tscn" id="2_1d7vj"]
 [ext_resource type="Texture2D" uid="uid://jrw2x4iog6o6" path="res://scenes/character/assets/images/basic_char.png" id="3_r1orq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivunw"]
@@ -11,8 +11,7 @@ radius = 236.076
 position = Vector2(0, 1)
 script = ExtResource("1_3q2ks")
 
-[node name="Gun" parent="." instance=ExtResource("1_oquvl")]
-position = Vector2(0.5, -1.5)
+[node name="Gun" parent="." instance=ExtResource("2_1d7vj")]
 is_ai_gun = true
 
 [node name="MinionSprite" type="Sprite2D" parent="."]

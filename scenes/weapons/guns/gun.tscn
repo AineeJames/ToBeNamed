@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://dofudcbhbj7yc"]
+
+[ext_resource type="Script" path="res://scenes/weapons/guns/gun.gd" id="1_yo73o"]
+[ext_resource type="Resource" uid="uid://dvhijnemddesv" path="res://scenes/weapons/guns/pistol/pistol.tres" id="2_4ka7o"]
+[ext_resource type="Texture2D" uid="uid://b01a67nu0oeso" path="res://scenes/weapons/guns/pistol/textures/pistol_gun.png" id="2_l12dp"]
+[ext_resource type="Texture2D" uid="uid://i1vva8h4y2v2" path="res://scenes/weapons/images/circle_progress.png" id="3_0lrjl"]
+[ext_resource type="FontFile" uid="uid://dplpohbesep78" path="res://global_assets/fonts/Pixeled.ttf" id="4_wr68r"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_yo73o")
+selected_gun = ExtResource("2_4ka7o")
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_l12dp")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FireRateTimer" type="Timer" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.0721433, 0.0721433)
+
+[node name="BulletsCountLabel" type="Label" parent="Control"]
+layout_mode = 2
+offset_left = -249.503
+offset_top = -471.284
+offset_right = -99.5033
+offset_bottom = -51.284
+theme_override_fonts/font = ExtResource("4_wr68r")
+theme_override_font_sizes/font_size = 120
+text = "8"
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ReloadingProgressBar" type="TextureProgressBar" parent="Control/CenterContainer"]
+layout_mode = 2
+value = 50.0
+fill_mode = 5
+texture_progress = ExtResource("3_0lrjl")
+tint_progress = Color(1, 1, 1, 0.52549)
+
+[node name="ClipBar" type="TextureProgressBar" parent="Control/CenterContainer"]
+layout_mode = 2
+value = 50.0
+fill_mode = 5
+texture_progress = ExtResource("3_0lrjl")
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]
