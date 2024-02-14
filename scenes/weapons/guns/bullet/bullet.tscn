@@ -1,19 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnihf6ib5ynbn"]
 
-[ext_resource type="Script" path="res://scenes/guns/bullet.gd" id="1_ukdhy"]
-[ext_resource type="Texture2D" uid="uid://df8rswamsp1da" path="res://scenes/guns/gun1/images/bullet1.png" id="2_l5x2u"]
+[ext_resource type="Script" path="res://scenes/weapons/guns/bullet/bullet.gd" id="1_neoye"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bxwco"]
 radius = 4.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1kx41"]
+load_path = "res://.godot/imported/bullet1.png-29caa10ce22e602087742925ab37ab62.ctex"
+
 [node name="Bullet" type="Area2D"]
-script = ExtResource("1_ukdhy")
+script = ExtResource("1_neoye")
 
 [node name="BulletCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bxwco")
 
 [node name="BulletSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("2_l5x2u")
+texture = SubResource("CompressedTexture2D_1kx41")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
