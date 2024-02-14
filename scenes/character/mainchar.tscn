@@ -43,7 +43,7 @@ zoom = Vector2(2, 2)
 [node name="DashTimer" type="Timer" parent="."]
 
 [node name="Minion" parent="." instance=ExtResource("4_3ll4i")]
-position = Vector2(-78, 15)
+position = Vector2(-65, 66)
 
 [node name="Gun" parent="." instance=ExtResource("5_464f2")]
 selected_gun = ExtResource("5_l2itq")
