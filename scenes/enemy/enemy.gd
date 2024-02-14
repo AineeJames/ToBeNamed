@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
-@export var speed: float = 100.0
-@export var max_speed: Vector2 = Vector2(100,100)
+@export var resource: EnemyResource
+
+var speed: float = 100.0
+var max_speed: Vector2 = Vector2(100,100)
 var Target: CharacterBody2D
 var Health: int = 100
 var dying = false
 
-@export var bump_factor: float = 5.0
+var bump_factor: float = 5.0
 
 @onready var Sprite = $Sprite2D
 @onready var CollisionShape = $CollisionShape2D
@@ -40,6 +42,10 @@ func _ready():
 	HealthBar.set_max_health(Health)
 	HealthBar.set_health(Health)
 	NavAgent.velocity_computed.connect(Callable(_on_velocity_computed))
+	speed = resource.MoveSpeed
+	Health = resource.Health
+	max_speed = Vector2(resource.MaxMoveSpeed,resource.MaxMoveSpeed)
+	Sprite.texture = resource.EnemySprite
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
