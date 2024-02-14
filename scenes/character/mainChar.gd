@@ -19,10 +19,14 @@ var player_can_dash = true
 @onready var DashTimer = $DashTimer
 @onready var PlayerCollision = $CollisionShape2D
 
+var total_damage = 0
 
 func _ready():
 	player_initial_scale = PlayerSprite.scale
 	GlobalEventBus.updated_dps.connect(update_dps_label)
+	GlobalEventBus.updated_killcount.connect(update_killcount_label)
+	GlobalEventBus.updated_critcount.connect(update_critcount_label)
+	GlobalEventBus.did_damage.connect(update_damage_label)
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/acceleration/deceleration.
@@ -73,6 +77,16 @@ func _physics_process(delta):
 
 func update_dps_label(dps):
 	%DPSLabel.text = "DPS: " + str(dps)
+	
+func update_critcount_label(critcount):
+	%CritLabel.text = "Crits: " + str(critcount)
+	
+func update_killcount_label(killcount):
+	%KillLabel.text = "Kills: " + str(killcount)
+	
+func update_damage_label(damage):
+	total_damage += damage
+	%TotalDamageLabel.text = "Total Damage: " + str(total_damage)
 
 func _on_dash_timer_timeout():
 	player_can_dash = true
