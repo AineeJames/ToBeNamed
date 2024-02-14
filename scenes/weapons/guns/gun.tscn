@@ -17,6 +17,8 @@ texture = ExtResource("2_l12dp")
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="FireRateTimer" type="Timer" parent="."]
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -62,3 +64,4 @@ fill_mode = 5
 texture_progress = ExtResource("3_0lrjl")
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]

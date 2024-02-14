@@ -6,14 +6,14 @@
 
 [resource]
 script = ExtResource("3_mrchr")
+gun_texture = ExtResource("1_n13w8")
+gun_texture_scale = Vector2(0.02, 0.02)
+automatic = false
 fire_rate = 1
 clip_size = 8
-bullet_speed = 40
 reload_time = 2.0
 crit_chance = 0.1
 gun_kick = 10.0
-automatic = false
-bullet_damage = 15.0
-gun_texture = ExtResource("1_n13w8")
-gun_texture_scale = Vector2(0.02, 0.02)
 bullet_texture = ExtResource("1_m3fuv")
+bullet_speed = 20
+bullet_damage = 15.0
