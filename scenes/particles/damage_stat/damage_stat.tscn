@@ -45,3 +45,5 @@ initial_velocity_max = 80.0
 color_ramp = SubResource("Gradient_oip8t")
 hue_variation_max = 0.1
 hue_variation_curve = SubResource("Curve_edhyb")
+
+[connection signal="finished" from="DamgeParticle" to="." method="_on_damge_particle_finished"]
