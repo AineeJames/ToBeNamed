@@ -32,6 +32,8 @@ func fire_bullet():
 	instance.velocity = velocity * movement_influence + Vector2(projectile_speed*cos(rotation + PI), projectile_speed*sin(rotation + PI))
 	instance.crit = randi_range(0, 100) < crit_percentage
 	get_tree().current_scene.add_child(instance)
+	if !is_ai_gun and instance.crit:
+		GlobalEventBus.player_did_crit.emit()
 	
 func _input(event):
 	if is_ai_gun:
