@@ -24,6 +24,6 @@ avoidance_enabled = true
 radius = 18.81
 
 [node name="HealthBar" parent="." instance=ExtResource("3_5ak2q")]
-position = Vector2(0, -37)
+position = Vector2(0, -13)
 
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]
