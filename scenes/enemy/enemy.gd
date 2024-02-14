@@ -97,7 +97,8 @@ func _on_take_damage(amount, bump_direction, crit):
 	damagestat_instance.emit_damage(amount, crit)
 	
 	
-		
+	var damage_done = clamp(amount,0,Health)
+	
 	Health -= amount
 	HealthBar.set_health(Health)
 	
@@ -115,7 +116,7 @@ func _on_take_damage(amount, bump_direction, crit):
 	
 	# send damage done to global event bus
 	# clamp to max of health damage
-	var damage_done = clamp(amount,0,Health)
+
 	GlobalEventBus.did_damage.emit(damage_done)
 	if Health <= 0:
 		call_deferred("disable_collision")
