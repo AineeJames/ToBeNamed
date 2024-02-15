@@ -19,6 +19,10 @@ var can_shoot = true
 var fire_held = false
 
 func _ready():
+	
+	if is_ai_gun:
+		GunUI.visible = false
+		
 	FireSoundPlayer.stream = selected_gun.fire_sound
 	
 	GunSprite.texture = selected_gun.gun_texture
