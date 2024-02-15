@@ -12,7 +12,7 @@ extends Node2D
 @onready var Bullet = load("res://scenes/weapons/guns/bullet/bullet.tscn")
 @onready var FireSoundPlayer: AudioStreamPlayer2D = $FireSoundPlayer
 
-var velocity = 0
+var velocity: Vector2 = Vector2(0,0)
 var prev_position: Vector2
 var bullets_remaining: int
 var can_shoot = true

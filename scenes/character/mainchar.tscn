@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdv3cai5ckpty"]
 
 [ext_resource type="Script" path="res://scenes/character/mainChar.gd" id="1_jpglg"]
-[ext_resource type="Texture2D" uid="uid://jrw2x4iog6o6" path="res://scenes/character/assets/images/basic_char.png" id="2_nqj0q"]
 [ext_resource type="Resource" uid="uid://dvhijnemddesv" path="res://scenes/weapons/guns/pistol/pistol.tres" id="3_bob78"]
 [ext_resource type="PackedScene" uid="uid://dgygcjgr0c380" path="res://scenes/minion/minion.tscn" id="4_3ll4i"]
 [ext_resource type="Resource" uid="uid://bbg741sme8hgy" path="res://scenes/weapons/guns/assult_rifle/assult_rifle.tres" id="5_l2itq"]
 [ext_resource type="Resource" uid="uid://7wdbrxsurcif" path="res://scenes/weapons/guns/shotgun/shotgun.tres" id="5_o7mdb"]
 [ext_resource type="Resource" uid="uid://d13m0t1d42h8i" path="res://scenes/weapons/guns/smg/smg.tres" id="5_sgqvx"]
+[ext_resource type="Texture2D" uid="uid://bqc76v5snlskm" path="res://scenes/character/assets/images/rebel_guy.png" id="6_idhet"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
 
@@ -19,8 +19,8 @@ guns = Array[Resource("res://scenes/weapons/guns/GunResource.gd")]([ExtResource(
 shape = SubResource("CircleShape2D_vwdvw")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_nqj0q")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_idhet")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

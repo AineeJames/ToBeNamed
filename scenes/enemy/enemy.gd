@@ -85,6 +85,9 @@ func _physics_process(delta):
 			NavAgent.set_velocity(new_velocity)
 		else:
 			_on_velocity_computed(new_velocity)
+			
+		Sprite.flip_h = new_velocity.x > 0
+		
 		if not dying:
 			move_and_slide()
 

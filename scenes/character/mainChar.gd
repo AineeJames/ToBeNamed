@@ -59,6 +59,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/acceleration/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
+		PlayerSprite.flip_h = direction == 1
 		velocity.x = move_toward(velocity.x, direction * max_walk_velocity, acceleration * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
