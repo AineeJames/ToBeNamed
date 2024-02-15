@@ -57,7 +57,7 @@ layout_mode = 2
 text = "Total Damage: 0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
 
 [node name="DashTimer" type="Timer" parent="."]
 
