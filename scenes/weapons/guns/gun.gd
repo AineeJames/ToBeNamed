@@ -7,10 +7,8 @@ extends Node2D
 
 @onready var GunSprite: Sprite2D = $GunSprite
 @onready var ReloadTimer: Timer = $ReloadTimer
-@onready var ReloadingBar = $Control/CenterContainer/ReloadingProgressBar
-@onready var ClipBar = $Control/CenterContainer/ClipBar
-@onready var BulletCounter = $Control/BulletsCountLabel
 @onready var FireRateTimer = $FireRateTimer
+@onready var GunUI = $GunUI
 @onready var Bullet = load("res://scenes/weapons/guns/bullet/bullet.tscn")
 
 var velocity = 0
@@ -24,22 +22,28 @@ func _ready():
 	GunSprite.scale = selected_gun.gun_texture_scale
 	bullets_remaining = selected_gun.clip_size
 	prev_position = global_position
-	ReloadingBar.min_value = 0
-	ReloadingBar.max_value = selected_gun.reload_time
-	ClipBar.max_value = selected_gun.clip_size
-	ClipBar.min_value = 0
+	
+	GunUI.set_reloading_bar_range(0, selected_gun.reload_time)
+	GunUI.set_clip_bar_range(0, selected_gun.clip_size)
 
 func _physics_process(delta):
 	velocity = (global_position - prev_position) / delta
 	prev_position = global_position
-	ReloadingBar.value = ReloadTimer.time_left
-	ClipBar.value = bullets_remaining
-	BulletCounter.text = str(bullets_remaining)
+	GunUI.update_reloading_bar_value(ReloadTimer.time_left)
+	GunUI.update_clip_bar_value(bullets_remaining)
+	GunUI.update_bullets_remaining(bullets_remaining)
+	GunUI.rotation_offset = rotation
 	if fire_held and can_shoot and bullets_remaining > 0:
 		if selected_gun.automatic:
 			can_shoot = false
 			fire_bullet()
 			FireRateTimer.start(1. / selected_gun.fire_rate)
+	var deg_rotation = abs(int(rotation_degrees) % 360)
+	if deg_rotation > 90 and deg_rotation < 270:
+		GunSprite.flip_v = true
+	else:
+		GunSprite.flip_v = false
+	
 
 func _input(event):
 	if is_ai_gun:
@@ -51,8 +55,7 @@ func _input(event):
 		fire_held = false
 		
 	if bullets_remaining > 0 and event.is_action_pressed("reload"):
-		ReloadingBar.visible = true
-		ClipBar.visible = false
+		GunUI.show_reloading()
 		bullets_remaining = 0
 		ReloadTimer.start(selected_gun.reload_time)
 	
@@ -62,8 +65,7 @@ func _input(event):
 		
 func _on_reload_timer_timeout():
 	bullets_remaining = selected_gun.clip_size
-	ReloadingBar.visible = false
-	ClipBar.visible = true
+	GunUI.show_clip()
 
 func _on_fire_rate_timer_timeout():
 	can_shoot = true
@@ -90,7 +92,6 @@ func fire_bullet():
 	
 	bullets_remaining -= 1
 	if bullets_remaining == 0:
-		ReloadingBar.visible = true
-		ClipBar.visible = false
+		GunUI.show_reloading()
 		ReloadTimer.start(selected_gun.reload_time)
 
