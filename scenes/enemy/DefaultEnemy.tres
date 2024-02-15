@@ -11,3 +11,4 @@ MaxMoveSpeed = 100
 AttackCooldown = 1
 EnemySprite = ExtResource("1_gcwu8")
 AttackRadius = 4
+AttackPower = 10

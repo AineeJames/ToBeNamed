@@ -119,7 +119,7 @@ func _on_take_damage(amount, bump_direction, crit):
 	# clamp to max of health damage
 
 	GlobalEventBus.did_damage.emit(damage_done)
-	if Health <= 0:
+	if Health <= 0 and not dying:
 		call_deferred("disable_collision")
 		dying = true
 		HealthBar.visible = false
