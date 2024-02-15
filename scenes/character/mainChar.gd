@@ -75,6 +75,25 @@ func _physics_process(delta):
 	Gun.global_position = global_position + Vector2(cos(angle_of_gun), sin(angle_of_gun)) * gun_distance_from_player
 	Gun.look_at(global_position)
 
+<<<<<<< Updated upstream
+||||||| Stash base
+func took_damage(amount, bump_vector):
+	print("took ", amount , "damage")
+	health -= amount
+	if health < 0:
+		print("Deaded :(")
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(self, "position", position + bump_vector, 0.1).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	
+
+=======
+func took_damage(amount, bump_vector):
+	print("took ", amount , "damage")
+	health -= amount
+	if health < 0:
+		print("Deaded :(")
+
+>>>>>>> Stashed changes
 func update_dps_label(dps):
 	%DPSLabel.text = "DPS: " + str(dps)
 	
