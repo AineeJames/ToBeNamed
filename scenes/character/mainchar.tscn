@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://jrw2x4iog6o6" path="res://scenes/character/assets/images/basic_char.png" id="2_nqj0q"]
 [ext_resource type="PackedScene" uid="uid://dgygcjgr0c380" path="res://scenes/minion/minion.tscn" id="4_3ll4i"]
 [ext_resource type="PackedScene" uid="uid://dofudcbhbj7yc" path="res://scenes/weapons/guns/gun.tscn" id="5_464f2"]
-[ext_resource type="Resource" uid="uid://bbg741sme8hgy" path="res://scenes/weapons/guns/assult_rifle/assult_rifle.tres" id="5_l2itq"]
+[ext_resource type="Resource" uid="uid://7wdbrxsurcif" path="res://scenes/weapons/guns/shotgun/shotgun.tres" id="5_o7mdb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
 
@@ -70,6 +70,6 @@ zoom = Vector2(2.5, 2.5)
 position = Vector2(-65, 66)
 
 [node name="Gun" parent="." instance=ExtResource("5_464f2")]
-selected_gun = ExtResource("5_l2itq")
+selected_gun = ExtResource("5_o7mdb")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

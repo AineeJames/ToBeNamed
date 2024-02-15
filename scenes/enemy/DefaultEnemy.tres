@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://dwpsiyhbdlrlq"]
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://rxavtpqrd4vi"]
 
 [ext_resource type="Script" path="res://scenes/enemy/EnemyResource.gd" id="1_fjjgt"]
 [ext_resource type="Texture2D" uid="uid://d2ax0bpbwghbu" path="res://scenes/enemy/enemy1.png" id="1_gcwu8"]
@@ -11,4 +11,3 @@ MaxMoveSpeed = 100
 AttackCooldown = 1
 EnemySprite = ExtResource("1_gcwu8")
 AttackRadius = 4
-AttackPower = 10

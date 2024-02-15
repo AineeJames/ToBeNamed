@@ -63,7 +63,6 @@ func _physics_process(delta):
 		tween.tween_callback(func(): PlayerCollision.disabled = false)
 		
 		DashTimer.start()
-		
 
 	move_and_slide()
 	

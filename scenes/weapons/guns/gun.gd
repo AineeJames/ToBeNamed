@@ -85,16 +85,17 @@ func fire_bullet():
 	tween.tween_property(self, "position", position, 0.05).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	
 	# Add nullet to scene
-	var instance = Bullet.instantiate()
-	instance.global_position = global_position
-	instance.rotation = rotation + deg_to_rad(randf_range(-selected_gun.bullet_spread, selected_gun.bullet_spread))
-	instance.velocity = velocity * movement_influence + Vector2(selected_gun.bullet_speed*cos(instance.rotation + PI), selected_gun.bullet_speed*sin(instance.rotation + PI))
-	instance.crit = randi_range(0, 100) < int(selected_gun.crit_chance * 100)
-	instance.damage = selected_gun.bullet_damage
-	instance.bullet_speed = selected_gun.bullet_speed
-	get_tree().current_scene.add_child(instance)
-	if !is_ai_gun and instance.crit:
-		GlobalEventBus.player_did_crit.emit()
+	for i in selected_gun.bullet_amount:
+		var instance = Bullet.instantiate()
+		instance.global_position = global_position
+		instance.rotation = rotation + deg_to_rad(randf_range(-selected_gun.bullet_spread, selected_gun.bullet_spread))
+		instance.velocity = velocity * movement_influence + Vector2(selected_gun.bullet_speed*cos(instance.rotation + PI), selected_gun.bullet_speed*sin(instance.rotation + PI))
+		instance.crit = randi_range(0, 100) < int(selected_gun.crit_chance * 100)
+		instance.damage = selected_gun.bullet_damage
+		instance.bullet_speed = selected_gun.bullet_speed
+		get_tree().current_scene.add_child(instance)
+		if !is_ai_gun and instance.crit:
+			GlobalEventBus.player_did_crit.emit()
 	
 	bullets_remaining -= 1
 	if bullets_remaining == 0:
