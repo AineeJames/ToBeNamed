@@ -12,6 +12,7 @@ func _ready():
 	pass # Replace with function body.
 
 func spawn_enemy():
+	GlobalEventBus.enemy_spawned.emit()
 	print("Spawning enemy")
 	var spawn_position = pick_spawn_location()
 	var enemy = enemy_scene.instantiate()

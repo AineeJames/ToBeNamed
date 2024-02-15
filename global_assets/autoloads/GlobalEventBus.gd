@@ -3,6 +3,7 @@ extends Node
 signal did_damage(amount)
 signal player_did_crit()
 signal enemy_killed()
+signal enemy_spawned()
 
 signal updated_dps(dps)
 signal updated_killcount(killcount)
@@ -17,6 +18,7 @@ const dps_rolling_window_len_seconds = 5
 const dps_calc_delay = 0.25
 var DpsCalcTimer: Timer
 var damage_per_second: int = 0
+var enemies_alive: int = 0
 
 var DamageValues: PackedInt32Array
 var Timestamps: PackedInt32Array
@@ -26,6 +28,7 @@ func _ready():
 	did_damage.connect(_on_did_damage)
 	enemy_killed.connect(_on_enemy_killed)
 	player_did_crit.connect(_on_player_did_crit)
+	enemy_spawned.connect(_on_enemy_spawned)
 	timer = Timer.new()
 	timer.autostart = true
 	timer.timeout.connect(_on_game_timer_timeout)
@@ -75,8 +78,11 @@ func _on_did_damage(amount):
 	var current_time = Time.get_ticks_msec() / 1000.0
 	DamageValues.append(amount)
 	Timestamps.append(current_time)
-	
 
 func _on_enemy_killed():
 	kill_count += 1
 	updated_killcount.emit(kill_count)
+	enemies_alive -= 1
+
+func _on_enemy_spawned():
+	enemies_alive += 1
