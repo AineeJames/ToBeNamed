@@ -15,15 +15,37 @@ var player_can_dash = true
 @export var max_velocity: float = 400
 @export var health: int = 100
 
-@onready var Gun = $Gun
+@export_category("Inventory")
+@export var guns: Array[GunResource]
+var gun_index = 0
+var Gun
+
 @onready var PlayerSprite = $PlayerSprite
 @onready var DashTimer = $DashTimer
 @onready var PlayerCollision = $CollisionShape2D
+@onready var GunScene = load("res://scenes/weapons/guns/gun.tscn")
 
 var total_damage = 0
 signal take_damage(amount, bump_direction)
 
+func create_gun():
+	if Gun:
+		Gun.queue_free()
+	Gun = GunScene.instantiate()
+	Gun.selected_gun = guns[gun_index]
+	%SelectedWeaponName.text = "Weapon: " + Gun.selected_gun.gun_name
+	add_child(Gun)
+
+func _input(event):
+	if event.is_action_pressed("next_weapon"):
+		gun_index = wrap(gun_index + 1, 0, guns.size())
+		create_gun()
+	if event.is_action_pressed("prev_weapon"):
+		gun_index = wrap(gun_index - 1, 0, guns.size())
+		create_gun()
+
 func _ready():
+	create_gun()
 	player_initial_scale = PlayerSprite.scale
 	GlobalEventBus.updated_dps.connect(update_dps_label)
 	GlobalEventBus.updated_killcount.connect(update_killcount_label)

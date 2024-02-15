@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="GunResource" load_steps=5 format=3 uid="uid://bbg741sme8hgy"]
 
 [ext_resource type="Texture2D" uid="uid://bmfj5j0xpu0e5" path="res://scenes/weapons/guns/assult_rifle/textures/5.56_bullet.png" id="1_34lg5"]
-[ext_resource type="Texture2D" uid="uid://cg52jkimwd1ld" path="res://scenes/weapons/guns/assult_rifle/textures/assault_rifle.png" id="2_stps6"]
 [ext_resource type="AudioStream" uid="uid://c7qvrxw745bt8" path="res://scenes/weapons/guns/assult_rifle/sounds/assaultrifle2.mp3" id="2_6g7od"]
+[ext_resource type="Texture2D" uid="uid://cg52jkimwd1ld" path="res://scenes/weapons/guns/assult_rifle/textures/assault_rifle.png" id="2_stps6"]
 [ext_resource type="Script" path="res://scenes/weapons/guns/GunResource.gd" id="3_fo7ml"]
 
 [resource]
 script = ExtResource("3_fo7ml")
-gun_texture = ExtResource("2_stps6")
 gun_name = "Assult Rifle"
 gun_description = "A medium fire rate, medium damage weapon."
 fire_sound = ExtResource("2_6g7od")
+gun_texture = ExtResource("2_stps6")
 gun_texture_scale = Vector2(0.02, 0.02)
 automatic = true
 fire_rate = 10
@@ -21,4 +21,5 @@ gun_kick = 5.0
 bullet_texture = ExtResource("1_34lg5")
 bullet_speed = 20
 bullet_damage = 10.0
+bullet_amount = 1
 bullet_spread = 5
