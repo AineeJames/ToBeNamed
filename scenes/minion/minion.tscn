@@ -12,7 +12,6 @@ position = Vector2(0, 1)
 script = ExtResource("1_3q2ks")
 
 [node name="Gun" parent="." instance=ExtResource("2_1d7vj")]
-movement_influence = 0.002
 is_ai_gun = true
 
 [node name="MinionSprite" type="Sprite2D" parent="."]

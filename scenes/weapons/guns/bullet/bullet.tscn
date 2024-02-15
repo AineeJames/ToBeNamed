@@ -15,6 +15,7 @@ script = ExtResource("1_neoye")
 shape = SubResource("CircleShape2D_bxwco")
 
 [node name="BulletSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 scale = Vector2(0.01, 0.01)
 texture = SubResource("CompressedTexture2D_1kx41")
 

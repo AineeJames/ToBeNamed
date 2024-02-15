@@ -25,3 +25,6 @@ func _on_body_entered(body):
 		body.emit_signal("take_damage", damage, velocity.normalized(), crit)
 	else:
 		pass
+		
+func set_bullet_texture(texture: Texture):
+	%BulletSprite.texture = texture

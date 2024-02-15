@@ -62,7 +62,7 @@ layout_mode = 2
 text = "Enemies Alive: 0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(3, 3)
 
 [node name="DashTimer" type="Timer" parent="."]
 
