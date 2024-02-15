@@ -79,8 +79,8 @@ func fire_bullet():
 	# Add nullet to scene
 	var instance = Bullet.instantiate()
 	instance.global_position = global_position
-	instance.rotation = rotation
-	instance.velocity = velocity * movement_influence + Vector2(selected_gun.bullet_speed*cos(rotation + PI), selected_gun.bullet_speed*sin(rotation + PI))
+	instance.rotation = rotation + deg_to_rad(randf_range(-selected_gun.bullet_spread, selected_gun.bullet_spread))
+	instance.velocity = velocity * movement_influence + Vector2(selected_gun.bullet_speed*cos(instance.rotation + PI), selected_gun.bullet_speed*sin(instance.rotation + PI))
 	instance.crit = randi_range(0, 100) < int(selected_gun.crit_chance * 100)
 	instance.damage = selected_gun.bullet_damage
 	instance.bullet_speed = selected_gun.bullet_speed
