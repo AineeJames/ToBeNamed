@@ -10,6 +10,7 @@ extends Node2D
 @onready var FireRateTimer = $FireRateTimer
 @onready var GunUI = $GunUI
 @onready var Bullet = load("res://scenes/weapons/guns/bullet/bullet.tscn")
+@onready var FireSoundPlayer: AudioStreamPlayer2D = $FireSoundPlayer
 
 var velocity = 0
 var prev_position: Vector2
@@ -18,6 +19,8 @@ var can_shoot = true
 var fire_held = false
 
 func _ready():
+	FireSoundPlayer.stream = selected_gun.fire_sound
+	
 	GunSprite.texture = selected_gun.gun_texture
 	GunSprite.scale = selected_gun.gun_texture_scale
 	bullets_remaining = selected_gun.clip_size
@@ -71,6 +74,9 @@ func _on_fire_rate_timer_timeout():
 	can_shoot = true
 
 func fire_bullet():
+
+	FireSoundPlayer.pitch_scale = 1 + randf_range(0, 0.2)
+	FireSoundPlayer.play(0)
 	
 	# Move gun backwards
 	var tween = get_tree().create_tween()
@@ -79,17 +85,18 @@ func fire_bullet():
 	tween.tween_property(self, "position", position, 0.05).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	
 	# Add nullet to scene
-	var instance = Bullet.instantiate()
-	instance.global_position = global_position
-	instance.rotation = rotation + deg_to_rad(randf_range(-selected_gun.bullet_spread, selected_gun.bullet_spread))
-	instance.velocity = velocity * movement_influence + Vector2(selected_gun.bullet_speed*cos(instance.rotation + PI), selected_gun.bullet_speed*sin(instance.rotation + PI))
-	instance.crit = randi_range(0, 100) < int(selected_gun.crit_chance * 100)
-	instance.damage = selected_gun.bullet_damage
-	instance.bullet_speed = selected_gun.bullet_speed
-	instance.set_bullet_texture(selected_gun.bullet_texture)
-	get_tree().current_scene.add_child(instance)
-	if !is_ai_gun and instance.crit:
-		GlobalEventBus.player_did_crit.emit()
+	for i in selected_gun.bullet_amount:
+		var instance = Bullet.instantiate()
+		instance.global_position = global_position
+		instance.rotation = rotation + deg_to_rad(randf_range(-selected_gun.bullet_spread, selected_gun.bullet_spread))
+		instance.velocity = velocity * movement_influence + Vector2(selected_gun.bullet_speed*cos(instance.rotation + PI), selected_gun.bullet_speed*sin(instance.rotation + PI))
+		instance.crit = randi_range(0, 100) < int(selected_gun.crit_chance * 100)
+		instance.damage = selected_gun.bullet_damage
+		instance.bullet_speed = selected_gun.bullet_speed
+		instance.set_bullet_texture(selected_gun.bullet_texture)
+		get_tree().current_scene.add_child(instance)
+		if !is_ai_gun and instance.crit:
+			GlobalEventBus.player_did_crit.emit()
 	
 	bullets_remaining -= 1
 	if bullets_remaining == 0:

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="GunResource" load_steps=5 format=3 uid="uid://7wdbrxsurcif"]
+
+[ext_resource type="Texture2D" uid="uid://dugkde0fliajt" path="res://scenes/weapons/guns/pistol/textures/pistol_bullet.png" id="1_dng3a"]
+[ext_resource type="AudioStream" uid="uid://dd83hoo7101pp" path="res://scenes/weapons/guns/shotgun/sounds/fire_shotgun.mp3" id="2_t2lxw"]
+[ext_resource type="Texture2D" uid="uid://b01a67nu0oeso" path="res://scenes/weapons/guns/pistol/textures/pistol_gun.png" id="3_0jo70"]
+[ext_resource type="Script" path="res://scenes/weapons/guns/GunResource.gd" id="4_uy1nd"]
+
+[resource]
+script = ExtResource("4_uy1nd")
+gun_name = "Shotgun"
+gun_description = "A spray weapon"
+fire_sound = ExtResource("2_t2lxw")
+gun_texture = ExtResource("3_0jo70")
+gun_texture_scale = Vector2(0.02, 0.02)
+automatic = false
+fire_rate = 1
+clip_size = 6
+reload_time = 3.0
+crit_chance = 0.2
+gun_kick = 20.0
+bullet_texture = ExtResource("1_dng3a")
+bullet_speed = 25
+bullet_damage = 2.5
+bullet_amount = 10
+bullet_spread = 3

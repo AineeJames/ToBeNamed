@@ -30,9 +30,11 @@ func _process(delta):
 
 	if closest_enemy:
 		set_gun_target_position(closest_enemy.global_position)
+		have_target = true
 	else:
-		pass
+		have_target = false
 
 
 func _on_attack_timer_timeout():
-	Gun.fire_bullet()
+	if have_target:
+		Gun.fire_bullet()

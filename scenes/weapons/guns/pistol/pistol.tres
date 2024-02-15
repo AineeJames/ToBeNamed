@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="GunResource" load_steps=4 format=3 uid="uid://dvhijnemddesv"]
+[gd_resource type="Resource" script_class="GunResource" load_steps=5 format=3 uid="uid://dvhijnemddesv"]
 
 [ext_resource type="Texture2D" uid="uid://dugkde0fliajt" path="res://scenes/weapons/guns/pistol/textures/pistol_bullet.png" id="1_m3fuv"]
 [ext_resource type="Texture2D" uid="uid://b01a67nu0oeso" path="res://scenes/weapons/guns/pistol/textures/pistol_gun.png" id="1_n13w8"]
+[ext_resource type="AudioStream" uid="uid://66g3j6nkst1y" path="res://scenes/weapons/guns/pistol/sounds/9mm-pistol-shoot.mp3" id="2_h2kxe"]
 [ext_resource type="Script" path="res://scenes/weapons/guns/GunResource.gd" id="3_mrchr"]
 
 [resource]
 script = ExtResource("3_mrchr")
+gun_name = "Pistol"
+gun_description = ""
+fire_sound = ExtResource("2_h2kxe")
 gun_texture = ExtResource("1_n13w8")
 gun_texture_scale = Vector2(0.02, 0.02)
 automatic = false
