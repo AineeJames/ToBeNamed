@@ -10,6 +10,7 @@ extends Node2D
 @onready var FireRateTimer = $FireRateTimer
 @onready var GunUI = $GunUI
 @onready var Bullet = load("res://scenes/weapons/guns/bullet/bullet.tscn")
+@onready var FireSoundPlayer: AudioStreamPlayer2D = $FireSoundPlayer
 
 var velocity = 0
 var prev_position: Vector2
@@ -18,6 +19,8 @@ var can_shoot = true
 var fire_held = false
 
 func _ready():
+	FireSoundPlayer.stream = selected_gun.fire_sound
+	
 	GunSprite.texture = selected_gun.gun_texture
 	GunSprite.scale = selected_gun.gun_texture_scale
 	bullets_remaining = selected_gun.clip_size
@@ -71,6 +74,9 @@ func _on_fire_rate_timer_timeout():
 	can_shoot = true
 
 func fire_bullet():
+
+	FireSoundPlayer.pitch_scale = 1 + randf_range(0, 0.2)
+	FireSoundPlayer.play(0)
 	
 	# Move gun backwards
 	var tween = get_tree().create_tween()

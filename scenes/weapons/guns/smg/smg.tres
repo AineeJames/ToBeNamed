@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="GunResource" load_steps=5 format=3 uid="uid://d13m0t1d42h8i"]
+
+[ext_resource type="Texture2D" uid="uid://dugkde0fliajt" path="res://scenes/weapons/guns/pistol/textures/pistol_bullet.png" id="1_be5tt"]
+[ext_resource type="Texture2D" uid="uid://b01a67nu0oeso" path="res://scenes/weapons/guns/pistol/textures/pistol_gun.png" id="2_6bbg8"]
+[ext_resource type="AudioStream" uid="uid://1reshxvxb8ls" path="res://scenes/weapons/guns/smg/sounds/smg-fire.mp3" id="2_acw2w"]
+[ext_resource type="Script" path="res://scenes/weapons/guns/GunResource.gd" id="3_pm53w"]
+
+[resource]
+script = ExtResource("3_pm53w")
+gun_name = "Sub-Machine Gun"
+gun_description = "A weapon w/ high fire rate and low-medium damge."
+fire_sound = ExtResource("2_acw2w")
+gun_texture = ExtResource("2_6bbg8")
+gun_texture_scale = Vector2(0.02, 0.02)
+automatic = true
+fire_rate = 20
+clip_size = 25
+reload_time = 1.75
+crit_chance = 0.05
+gun_kick = 7.0
+bullet_texture = ExtResource("1_be5tt")
+bullet_speed = 25
+bullet_damage = 5.0
+bullet_spread = 7

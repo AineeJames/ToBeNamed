@@ -2,6 +2,15 @@ extends Resource
 
 class_name GunResource
 
+# Info
+@export_category("Gun Info")
+@export var gun_name: String
+@export_multiline var gun_description: String
+
+# Sounds
+@export_category("Gun Sounds")
+@export var fire_sound: AudioStream
+
 # Stats
 @export_category("Gun Stats")
 @export var gun_texture: Texture

@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="GunResource" load_steps=4 format=3 uid="uid://bbg741sme8hgy"]
+[gd_resource type="Resource" script_class="GunResource" load_steps=5 format=3 uid="uid://bbg741sme8hgy"]
 
 [ext_resource type="Texture2D" uid="uid://dugkde0fliajt" path="res://scenes/weapons/guns/pistol/textures/pistol_bullet.png" id="1_5nc6i"]
+[ext_resource type="AudioStream" uid="uid://c7qvrxw745bt8" path="res://scenes/weapons/guns/assult_rifle/sounds/assaultrifle2.mp3" id="2_6g7od"]
 [ext_resource type="Texture2D" uid="uid://b01a67nu0oeso" path="res://scenes/weapons/guns/pistol/textures/pistol_gun.png" id="2_8fhy7"]
 [ext_resource type="Script" path="res://scenes/weapons/guns/GunResource.gd" id="3_fo7ml"]
 
 [resource]
 script = ExtResource("3_fo7ml")
+gun_name = "Assult Rifle"
+gun_description = "A medium fire rate, medium damage weapon."
+fire_sound = ExtResource("2_6g7od")
 gun_texture = ExtResource("2_8fhy7")
 gun_texture_scale = Vector2(0.02, 0.02)
 automatic = true
