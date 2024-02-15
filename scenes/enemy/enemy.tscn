@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcleq7b1cwms"]
+[gd_scene load_steps=6 format=3 uid="uid://bcleq7b1cwms"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_0ehme"]
 [ext_resource type="Texture2D" uid="uid://d2ax0bpbwghbu" path="res://scenes/enemy/enemy1.png" id="2_uks33"]
@@ -6,6 +6,8 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_er3cj"]
 height = 44.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mewq7"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 platform_floor_layers = 0
@@ -27,4 +29,16 @@ radius = 18.81
 [node name="HealthBar" parent="." instance=ExtResource("3_5ak2q")]
 position = Vector2(0, -13)
 
+[node name="AttackArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="AttackAreaCollider" type="CollisionShape2D" parent="AttackArea"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_mewq7")
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [connection signal="take_damage" from="." to="." method="_on_take_damage"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
