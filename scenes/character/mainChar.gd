@@ -13,6 +13,7 @@ var player_can_dash = true
 @export var deceleration: float = 1200.0
 @export var max_walk_velocity: float = 200
 @export var max_velocity: float = 400
+@export var health: int = 100
 
 @onready var Gun = $Gun
 @onready var PlayerSprite = $PlayerSprite
@@ -20,6 +21,7 @@ var player_can_dash = true
 @onready var PlayerCollision = $CollisionShape2D
 
 var total_damage = 0
+signal take_damage(amount, bump_direction)
 
 func _ready():
 	player_initial_scale = PlayerSprite.scale
@@ -27,6 +29,9 @@ func _ready():
 	GlobalEventBus.updated_killcount.connect(update_killcount_label)
 	GlobalEventBus.updated_critcount.connect(update_critcount_label)
 	GlobalEventBus.did_damage.connect(update_damage_label)
+	GlobalEventBus.enemy_killed.connect(update_enemies_label)
+	GlobalEventBus.enemy_spawned.connect(update_enemies_label)
+	take_damage.connect(took_damage)
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/acceleration/deceleration.
@@ -75,25 +80,12 @@ func _physics_process(delta):
 	Gun.global_position = global_position + Vector2(cos(angle_of_gun), sin(angle_of_gun)) * gun_distance_from_player
 	Gun.look_at(global_position)
 
-<<<<<<< Updated upstream
-||||||| Stash base
-func took_damage(amount, bump_vector):
-	print("took ", amount , "damage")
-	health -= amount
-	if health < 0:
-		print("Deaded :(")
-	var tween = get_tree().create_tween()
-	tween.parallel().tween_property(self, "position", position + bump_vector, 0.1).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	
-
-=======
 func took_damage(amount, bump_vector):
 	print("took ", amount , "damage")
 	health -= amount
 	if health < 0:
 		print("Deaded :(")
 
->>>>>>> Stashed changes
 func update_dps_label(dps):
 	%DPSLabel.text = "DPS: " + str(dps)
 	
@@ -107,5 +99,8 @@ func update_damage_label(damage):
 	total_damage += damage
 	%TotalDamageLabel.text = "Total Damage: " + str(total_damage)
 
+func update_enemies_label():
+	%EnemiesAliveLabel.text = "Enemies Alive: " + str(GlobalEventBus.enemies_alive)
+	
 func _on_dash_timer_timeout():
 	player_can_dash = true
