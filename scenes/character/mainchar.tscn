@@ -8,7 +8,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 platform_floor_layers = 0
 script = ExtResource("1_jpglg")
 
@@ -55,6 +55,11 @@ text = "Kills: 0"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Total Damage: 0"
+
+[node name="EnemiesAliveLabel" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enemies Alive: 0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)

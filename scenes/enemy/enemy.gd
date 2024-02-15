@@ -6,7 +6,7 @@ var speed: float = 100.0
 var max_speed: Vector2 = Vector2(100,100)
 var Target: CharacterBody2D
 var Health: int = 100
-var dying = false
+var dying: bool = false
 
 var bump_factor: float = 5.0
 
@@ -47,6 +47,10 @@ func _ready():
 	max_speed = Vector2(resource.MaxMoveSpeed,resource.MaxMoveSpeed)
 	Sprite.texture = resource.EnemySprite
 	HealthBar.move_local_y(-Sprite.texture.get_height()*Sprite.scale.y * .5)
+	%AttackAreaCollider.scale = Vector2(resource.AttackRadius,resource.AttackRadius)
+	%AttackTimer.autostart = false
+	%AttackTimer.wait_time = resource.AttackCooldown
+	%AttackTimer.timeout.connect(do_attack)
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
@@ -127,3 +131,47 @@ func _on_take_damage(amount, bump_direction, crit):
 func disable_collision():
 	#did this deferred because 
 	CollisionShape.disabled = true
+
+func do_attack():
+	# find the closest player or something
+	# and do damage
+	var target: Node2D = get_closest_player_in_area(%AttackArea)
+	if target and not dying:
+		target.emit_signal("take_damage", resource.AttackPower, velocity.normalized())
+		#TODO: Give enemies different bump power
+
+func get_closest_player_in_area(area: Area2D) -> Node2D:
+	var potential_targets = area.get_overlapping_bodies()
+	var closest_target = null
+	var closest_distance = INF # Use infinity as the initial comparison value
+
+	for target in potential_targets:
+		if target.is_in_group("player"): # Assuming 'enemy' is the group name for enemy objects
+			var distance = position.distance_to(target.position) # Calculate distance to the target
+			
+			if distance < closest_distance:
+				closest_distance = distance
+				closest_target = target
+
+	if closest_target:
+		return closest_target
+	else:
+		return null
+
+
+func _on_attack_area_body_entered(body):
+	# check for player to start doing attack timer
+	if body.is_in_group("player"):
+		%AttackTimer.wait_time = resource.AttackCooldown
+		%AttackTimer.start()
+	else:
+		pass
+
+
+func _on_attack_area_body_exited(body):
+	# in both area body entered and exited need to check
+	# if another player was already in it 
+	if body.is_in_group("player"):
+		%AttackTimer.stop()
+	else:
+		pass
