@@ -17,3 +17,4 @@ gun_kick = 5.0
 bullet_texture = ExtResource("1_5nc6i")
 bullet_speed = 20
 bullet_damage = 10.0
+bullet_spread = 5
