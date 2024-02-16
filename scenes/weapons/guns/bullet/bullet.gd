@@ -4,6 +4,7 @@ var velocity: Vector2 = Vector2(0,0)
 var crit
 var damage
 var bullet_speed
+var knockback
 
 func _ready():
 	var timer = Timer.new()
@@ -22,7 +23,7 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
 		queue_free()
-		body.emit_signal("take_damage", damage, velocity.normalized(), crit)
+		body.emit_signal("take_damage", damage, velocity.normalized() * knockback, crit)
 	else:
 		pass
 		

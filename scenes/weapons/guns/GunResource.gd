@@ -30,6 +30,7 @@ class_name GunResource
 @export var bullet_texture: Texture
 @export var bullet_speed: int = 20
 @export var bullet_damage: float = 15.0
+@export var bullet_knockback: float = 0
 @export var bullet_amount: int = 1
 @export_range(0, 360, 1, "degrees") var bullet_spread = 3
 

@@ -21,5 +21,6 @@ gun_kick = 20.0
 bullet_texture = ExtResource("1_dng3a")
 bullet_speed = 25
 bullet_damage = 2.5
+bullet_knockback = 0.0
 bullet_amount = 10
 bullet_spread = 3
