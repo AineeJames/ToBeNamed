@@ -67,7 +67,9 @@ func _input(event):
 		ReloadTimer.start(selected_gun.reload_time)
 	
 	if not selected_gun.automatic and event.is_action_pressed("fire") and bullets_remaining > 0 and can_shoot:
+		can_shoot = false
 		fire_bullet()
+		FireRateTimer.start(1. / selected_gun.fire_rate)
 		
 		
 func _on_reload_timer_timeout():
