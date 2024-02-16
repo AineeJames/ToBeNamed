@@ -8,9 +8,12 @@ extends Node2D
 @onready var GunSprite: Sprite2D = $GunSprite
 @onready var ReloadTimer: Timer = $ReloadTimer
 @onready var FireRateTimer = $FireRateTimer
+@onready var RechamberDelayTimer = $RechamberDelayTimer
 @onready var GunUI = $GunUI
 @onready var Bullet = load("res://scenes/weapons/guns/bullet/bullet.tscn")
 @onready var FireSoundPlayer: AudioStreamPlayer2D = $FireSoundPlayer
+@onready var ReloadSoundPlayer: AudioStreamPlayer2D = $ReloadSoundPlayer
+@onready var RechamberSoundPlayer: AudioStreamPlayer2D = $RechamberSoundPlayer
 
 var velocity: Vector2 = Vector2(0,0)
 var prev_position: Vector2
@@ -73,6 +76,7 @@ func _input(event):
 		
 		
 func _on_reload_timer_timeout():
+	ReloadSoundPlayer.stop()
 	bullets_remaining = selected_gun.clip_size
 	GunUI.show_clip()
 
@@ -107,6 +111,14 @@ func fire_bullet():
 	
 	bullets_remaining -= 1
 	if bullets_remaining == 0:
+		ReloadSoundPlayer.stream = selected_gun.reload_sound
+		ReloadSoundPlayer.play(0)
 		GunUI.show_reloading()
 		ReloadTimer.start(selected_gun.reload_time)
+	else:
+		if selected_gun.rechamber_sound:
+			RechamberDelayTimer.start(selected_gun.rechamber_sound_delay)
 
+func _on_rechamber_delay_timer_timeout():
+	RechamberSoundPlayer.stream = selected_gun.rechamber_sound
+	RechamberSoundPlayer.play(0)

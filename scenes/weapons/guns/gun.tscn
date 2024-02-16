@@ -18,10 +18,21 @@ one_shot = true
 
 [node name="FireRateTimer" type="Timer" parent="."]
 
+[node name="RechamberDelayTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [node name="GunUI" parent="." instance=ExtResource("4_ajjsy")]
 
 [node name="FireSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0
 
+[node name="ReloadSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -15.0
+
+[node name="RechamberSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -15.0
+
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]
+[connection signal="timeout" from="RechamberDelayTimer" to="." method="_on_rechamber_delay_timer_timeout"]

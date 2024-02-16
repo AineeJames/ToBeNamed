@@ -76,5 +76,6 @@ zoom = Vector2(3, 3)
 
 [node name="Minion" parent="." instance=ExtResource("4_3ll4i")]
 position = Vector2(-65, 66)
+minion_disabled = true
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
