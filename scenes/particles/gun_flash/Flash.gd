@@ -6,4 +6,4 @@ func _ready():
 	energy = randf_range(3, 4)
 
 func _process(delta):
-	energy -= 0.5
+	energy -= 0.01
