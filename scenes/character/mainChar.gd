@@ -70,6 +70,7 @@ func _ready():
 	take_damage.connect(took_damage)
 
 func _physics_process(delta):
+	update_fps_label()
 	# Get the input direction and handle the movement/acceleration/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
@@ -127,6 +128,9 @@ func update_damage_label(damage):
 
 func update_enemies_label():
 	%EnemiesAliveLabel.text = "Enemies Alive: " + str(GlobalEventBus.enemies_alive)
+	
+func update_fps_label():
+	%FPSLabel.text = "FPS: " + str(Engine.get_frames_per_second())
 	
 func _on_dash_timer_timeout():
 	player_can_dash = true
