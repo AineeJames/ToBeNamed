@@ -18,6 +18,7 @@ reload_sound = ExtResource("5_uk0bo")
 gun_texture = ExtResource("3_y72ch")
 gun_texture_mirror = true
 gun_texture_scale = Vector2(0.5, 0.5)
+gun_tip_offset = Vector2(15, -4)
 automatic = false
 fire_rate = 1
 clip_size = 6
