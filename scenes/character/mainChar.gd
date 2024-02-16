@@ -47,8 +47,8 @@ func create_gun():
 	Gun = GunScene.instantiate()
 	Gun.selected_gun = guns[gun_index]
 	%SelectedWeaponName.text = "Weapon: " + Gun.selected_gun.gun_name
-	position_gun()
 	add_child(Gun)
+	position_gun()
 
 func _input(event):
 	if event.is_action_pressed("next_weapon"):

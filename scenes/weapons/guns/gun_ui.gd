@@ -33,5 +33,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotation = -rotation_offset
+	offset_rotation()
 	pass
+	
+func offset_rotation():
+	rotation = -rotation_offset

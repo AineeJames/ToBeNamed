@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdv3cai5ckpty"]
+[gd_scene load_steps=10 format=3 uid="uid://bdv3cai5ckpty"]
 
 [ext_resource type="Script" path="res://scenes/character/mainChar.gd" id="1_jpglg"]
 [ext_resource type="Resource" uid="uid://dvhijnemddesv" path="res://scenes/weapons/guns/pistol/pistol.tres" id="3_bob78"]
@@ -7,13 +7,14 @@
 [ext_resource type="Resource" uid="uid://7wdbrxsurcif" path="res://scenes/weapons/guns/shotgun/shotgun.tres" id="5_o7mdb"]
 [ext_resource type="Resource" uid="uid://d13m0t1d42h8i" path="res://scenes/weapons/guns/smg/smg.tres" id="5_sgqvx"]
 [ext_resource type="Texture2D" uid="uid://bqc76v5snlskm" path="res://scenes/character/assets/images/rebel_guy.png" id="6_idhet"]
+[ext_resource type="FontFile" uid="uid://dplpohbesep78" path="res://global_assets/fonts/Pixeled.ttf" id="7_wib8x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 platform_floor_layers = 0
 script = ExtResource("1_jpglg")
-guns = Array[Resource("res://scenes/weapons/guns/GunResource.gd")]([ExtResource("5_l2itq"), ExtResource("3_bob78"), ExtResource("5_o7mdb"), ExtResource("5_sgqvx")])
+guns = Array[Resource("res://scenes/weapons/guns/GunResource.gd")]([ExtResource("3_bob78"), ExtResource("5_o7mdb"), ExtResource("5_sgqvx"), ExtResource("5_l2itq")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vwdvw")
@@ -42,31 +43,43 @@ offset_bottom = 40.0
 [node name="DPSLabel" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_wib8x")
+theme_override_font_sizes/font_size = 40
 text = "ERMMMM BROO"
 
 [node name="CritLabel" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_wib8x")
+theme_override_font_sizes/font_size = 40
 text = "Crits: 0"
 
 [node name="KillLabel" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_wib8x")
+theme_override_font_sizes/font_size = 40
 text = "Kills: 0"
 
 [node name="TotalDamageLabel" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_wib8x")
+theme_override_font_sizes/font_size = 40
 text = "Total Damage: 0"
 
 [node name="EnemiesAliveLabel" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_wib8x")
+theme_override_font_sizes/font_size = 40
 text = "Enemies Alive: 0"
 
 [node name="SelectedWeaponName" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_wib8x")
+theme_override_font_sizes/font_size = 40
 text = "Enemies Alive: 0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
