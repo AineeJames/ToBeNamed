@@ -16,6 +16,10 @@ visible = false
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("2_l12dp")
 
+[node name="GunTipNode" type="Node2D" parent="GunSprite"]
+unique_name_in_owner = true
+position = Vector2(2.08165e-12, 2.08165e-12)
+
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
 

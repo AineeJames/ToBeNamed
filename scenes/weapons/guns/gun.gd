@@ -71,8 +71,6 @@ func _physics_process(delta):
 		GunSprite.flip_v = false
 	
 
-
-
 func _input(event):
 	if is_ai_gun:
 		return
