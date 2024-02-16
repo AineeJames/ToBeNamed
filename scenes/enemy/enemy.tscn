@@ -23,7 +23,6 @@ position = Vector2(-0.12, -0.130001)
 shape = SubResource("CapsuleShape2D_er3cj")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
 radius = 18.81
 
 [node name="HealthBar" parent="." instance=ExtResource("3_5ak2q")]
