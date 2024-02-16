@@ -8,8 +8,6 @@ var Target: CharacterBody2D
 var Health: int = 100
 var dying: bool = false
 
-var bump_factor: float = 5.0
-
 @onready var Sprite = $Sprite2D
 @onready var CollisionShape = $CollisionShape2D
 @onready var HealthBar = $HealthBar
@@ -91,7 +89,7 @@ func _physics_process(delta):
 		if not dying:
 			move_and_slide()
 
-func _on_take_damage(amount, bump_direction, crit):
+func _on_take_damage(amount, knockback, crit):
 	if crit:
 		amount = amount * 2
 	
@@ -109,10 +107,10 @@ func _on_take_damage(amount, bump_direction, crit):
 	var blood_instance = BloodParticles.instantiate()
 	blood_instance.global_position = global_position
 	blood_instance.emitting = true
-	blood_instance.direction = bump_direction
+	blood_instance.direction = knockback
 	get_tree().current_scene.add_child(blood_instance)
 	
-	var bump_vector = bump_direction * bump_factor
+	var bump_vector = knockback
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(self, "position", position + bump_vector, 0.1).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(Sprite, "modulate", Color.PALE_VIOLET_RED, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

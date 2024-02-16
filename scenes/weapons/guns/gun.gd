@@ -99,6 +99,7 @@ func fire_bullet():
 		instance.crit = randi_range(0, 100) < int(selected_gun.crit_chance * 100)
 		instance.damage = selected_gun.bullet_damage
 		instance.bullet_speed = selected_gun.bullet_speed
+		instance.knockback = selected_gun.bullet_knockback
 		instance.set_bullet_texture(selected_gun.bullet_texture)
 		get_tree().current_scene.add_child(instance)
 		if !is_ai_gun and instance.crit:
