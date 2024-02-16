@@ -17,6 +17,7 @@ class_name GunResource
 # Stats
 @export_category("Gun Stats")
 @export var gun_texture: Texture
+@export var gun_texture_mirror: bool = false
 @export var gun_texture_scale: Vector2 = Vector2(1, 1)
 
 @export var automatic: bool = false

@@ -29,6 +29,8 @@ func _ready():
 	FireSoundPlayer.stream = selected_gun.fire_sound
 	
 	GunSprite.texture = selected_gun.gun_texture
+	if selected_gun.gun_texture_mirror:
+		GunSprite.flip_h = true
 	GunSprite.scale = selected_gun.gun_texture_scale
 	bullets_remaining = selected_gun.clip_size
 	prev_position = global_position
