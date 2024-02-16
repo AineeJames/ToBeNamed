@@ -11,6 +11,7 @@ extends Node2D
 @onready var RechamberDelayTimer = $RechamberDelayTimer
 @onready var GunUI = $GunUI
 @onready var Bullet = load("res://scenes/weapons/guns/bullet/bullet.tscn")
+@onready var GunFlash = load("res://scenes/particles/gun_flash/GunFlash.tscn")
 @onready var FireSoundPlayer: AudioStreamPlayer2D = $FireSoundPlayer
 @onready var ReloadSoundPlayer: AudioStreamPlayer2D = $ReloadSoundPlayer
 @onready var RechamberSoundPlayer: AudioStreamPlayer2D = $RechamberSoundPlayer
@@ -101,9 +102,18 @@ func _on_fire_rate_timer_timeout():
 	can_shoot = true
 
 func fire_bullet():
+	
+	var tip = global_position + selected_gun.gun_tip_offset.rotated(rotation - PI)
 
 	FireSoundPlayer.pitch_scale = 1 + randf_range(0, 0.2)
 	FireSoundPlayer.play(0)
+	
+	# Do flash
+	var flash_instance = GunFlash.instantiate()
+	get_tree().current_scene.add_child(flash_instance)
+	flash_instance.set_flash_angle(rotation)
+	flash_instance.global_position = tip
+	flash_instance.emit_flash()
 	
 	# Move gun backwards
 	var tween = get_tree().create_tween()
@@ -114,7 +124,7 @@ func fire_bullet():
 	# Add nullet to scene
 	for i in selected_gun.bullet_amount:
 		var instance = Bullet.instantiate()
-		instance.global_position = global_position
+		instance.global_position = tip
 		instance.rotation = rotation + deg_to_rad(randf_range(-selected_gun.bullet_spread, selected_gun.bullet_spread))
 		instance.velocity = velocity * movement_influence + Vector2(selected_gun.bullet_speed*cos(instance.rotation + PI), selected_gun.bullet_speed*sin(instance.rotation + PI))
 		instance.crit = randi_range(0, 100) < int(selected_gun.crit_chance * 100)

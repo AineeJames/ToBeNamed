@@ -20,6 +20,8 @@ class_name GunResource
 @export var gun_texture_mirror: bool = false
 @export var gun_texture_scale: Vector2 = Vector2(1, 1)
 
+@export var gun_tip_offset: Vector2 = Vector2.ZERO
+
 @export var automatic: bool = false
 @export var fire_rate: int = 5
 
