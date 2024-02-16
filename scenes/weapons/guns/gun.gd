@@ -24,8 +24,7 @@ var fire_held = false
 
 func _ready():
 	
-	if is_ai_gun:
-		GunUI.visible = false
+	
 		
 	FireSoundPlayer.stream = selected_gun.fire_sound
 	
@@ -34,10 +33,24 @@ func _ready():
 		GunSprite.flip_h = true
 	GunSprite.scale = selected_gun.gun_texture_scale
 	bullets_remaining = selected_gun.clip_size
+	
+	GunUI.rotation_offset = rotation
+	var deg_rotation = abs(int(rotation_degrees) % 360)
+	if deg_rotation > 90 and deg_rotation < 270:
+		GunSprite.flip_v = true
+	else:
+		GunSprite.flip_v = false
+	GunUI.offset_rotation()
+	
+	
 	prev_position = global_position
 	
 	GunUI.set_reloading_bar_range(0, selected_gun.reload_time)
 	GunUI.set_clip_bar_range(0, selected_gun.clip_size)
+	if !is_ai_gun:
+		GunUI.visible = true
+	
+	
 
 func _physics_process(delta):
 	velocity = (global_position - prev_position) / delta
@@ -57,6 +70,8 @@ func _physics_process(delta):
 	else:
 		GunSprite.flip_v = false
 	
+
+
 
 func _input(event):
 	if is_ai_gun:

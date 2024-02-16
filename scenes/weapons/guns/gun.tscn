@@ -10,6 +10,7 @@ script = ExtResource("1_yo73o")
 selected_gun = ExtResource("2_4ka7o")
 
 [node name="GunUI" parent="." instance=ExtResource("4_ajjsy")]
+visible = false
 
 [node name="GunSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.02, 0.02)
