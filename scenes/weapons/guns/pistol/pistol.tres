@@ -1,21 +1,24 @@
-[gd_resource type="Resource" script_class="GunResource" load_steps=5 format=3 uid="uid://dvhijnemddesv"]
+[gd_resource type="Resource" script_class="GunResource" load_steps=6 format=3 uid="uid://dvhijnemddesv"]
 
 [ext_resource type="Texture2D" uid="uid://dugkde0fliajt" path="res://scenes/weapons/guns/pistol/textures/pistol_bullet.png" id="1_m3fuv"]
 [ext_resource type="Texture2D" uid="uid://b01a67nu0oeso" path="res://scenes/weapons/guns/pistol/textures/pistol_gun.png" id="1_n13w8"]
 [ext_resource type="AudioStream" uid="uid://66g3j6nkst1y" path="res://scenes/weapons/guns/pistol/sounds/9mm-pistol-shoot.mp3" id="2_h2kxe"]
 [ext_resource type="Script" path="res://scenes/weapons/guns/GunResource.gd" id="3_mrchr"]
+[ext_resource type="AudioStream" uid="uid://5ww137a66b82" path="res://scenes/weapons/guns/pistol/sounds/pistock-reload.mp3" id="4_a6k6k"]
 
 [resource]
 script = ExtResource("3_mrchr")
 gun_name = "Pistol"
 gun_description = ""
 fire_sound = ExtResource("2_h2kxe")
+rechamber_sound_delay = 2.08165e-12
+reload_sound = ExtResource("4_a6k6k")
 gun_texture = ExtResource("1_n13w8")
 gun_texture_scale = Vector2(0.02, 0.02)
 automatic = false
 fire_rate = 5
 clip_size = 8
-reload_time = 1.0
+reload_time = 2.0
 crit_chance = 0.1
 gun_kick = 10.0
 bullet_texture = ExtResource("1_m3fuv")

@@ -1,15 +1,20 @@
-[gd_resource type="Resource" script_class="GunResource" load_steps=5 format=3 uid="uid://7wdbrxsurcif"]
+[gd_resource type="Resource" script_class="GunResource" load_steps=7 format=3 uid="uid://7wdbrxsurcif"]
 
 [ext_resource type="Texture2D" uid="uid://dugkde0fliajt" path="res://scenes/weapons/guns/pistol/textures/pistol_bullet.png" id="1_dng3a"]
 [ext_resource type="AudioStream" uid="uid://dd83hoo7101pp" path="res://scenes/weapons/guns/shotgun/sounds/fire_shotgun.mp3" id="2_t2lxw"]
 [ext_resource type="Texture2D" uid="uid://b01a67nu0oeso" path="res://scenes/weapons/guns/pistol/textures/pistol_gun.png" id="3_0jo70"]
+[ext_resource type="AudioStream" uid="uid://bxf2uiht7jdo3" path="res://scenes/weapons/guns/shotgun/sounds/shotgun-cocking.mp3" id="4_uobc6"]
 [ext_resource type="Script" path="res://scenes/weapons/guns/GunResource.gd" id="4_uy1nd"]
+[ext_resource type="AudioStream" uid="uid://1u6td1gnky4r" path="res://scenes/weapons/guns/shotgun/sounds/shotgun-reload.mp3" id="5_uk0bo"]
 
 [resource]
 script = ExtResource("4_uy1nd")
 gun_name = "Shotgun"
 gun_description = "A spray weapon"
 fire_sound = ExtResource("2_t2lxw")
+rechamber_sound = ExtResource("4_uobc6")
+rechamber_sound_delay = 0.5
+reload_sound = ExtResource("5_uk0bo")
 gun_texture = ExtResource("3_0jo70")
 gun_texture_scale = Vector2(0.02, 0.02)
 automatic = false

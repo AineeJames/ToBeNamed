@@ -3,6 +3,8 @@ extends Node2D
 @onready var Gun = $Gun
 @onready var Attack_Area = $Attack_Radius
 @export var gun_distance_from_minion = 35
+@export var minion_disabled: bool = false
+
 # Called when the node enters the scene tree for the first time.
 var have_target: bool = false
 func _ready():
@@ -36,5 +38,5 @@ func _process(delta):
 
 
 func _on_attack_timer_timeout():
-	if have_target:
+	if not minion_disabled and have_target:
 		Gun.fire_bullet()

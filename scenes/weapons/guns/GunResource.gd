@@ -10,6 +10,9 @@ class_name GunResource
 # Sounds
 @export_category("Gun Sounds")
 @export var fire_sound: AudioStream
+@export var rechamber_sound: AudioStream
+@export var rechamber_sound_delay: float = 0
+@export var reload_sound: AudioStream
 
 # Stats
 @export_category("Gun Stats")
