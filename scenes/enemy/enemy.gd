@@ -23,7 +23,8 @@ const monsterNames = [
 	"Daniel",
 	"Darnell",
 	"Ronnie",
-	"Bob"
+	"Bob",
+	"John"
 ]
 
 const monsterDescriptors = [
