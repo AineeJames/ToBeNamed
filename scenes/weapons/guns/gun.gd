@@ -66,9 +66,6 @@ func _physics_process(delta):
 		GunUI.is_reloading(true)
 		var elapsed_reload_time = selected_gun.reload_time - ReloadTimer.time_left
 		var percent_done_reloading = elapsed_reload_time / selected_gun.reload_time
-		print("reload_time: ", selected_gun.reload_time)
-		print("elapsed: ", elapsed_reload_time)
-		print("percent: ", percent_done_reloading * 100, "%")
 		GunUI.update_clip_bar_value(selected_gun.clip_size * percent_done_reloading)
 	else:
 		GunUI.is_reloading(false)
