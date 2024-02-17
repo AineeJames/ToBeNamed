@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8kwp2"]
 shader = ExtResource("4_ukcw2")
-shader_parameter/inner_radius = 0.45
+shader_parameter/inner_radius = 0.4
 shader_parameter/outer_radius = 0.5
 shader_parameter/num_bullets = 7
 shader_parameter/clip_size = 10
@@ -30,11 +30,19 @@ script = ExtResource("1_f6al3")
 
 [node name="BulletsCountLabel" type="Label" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-offset_left = -332.671
-offset_top = -429.7
-offset_right = -92.6712
-offset_bottom = -149.7
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 194.058
+offset_right = 110.0
+offset_bottom = 394.058
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.969, 1)
 theme_override_fonts/font = ExtResource("1_xo0hn")
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
@@ -42,6 +50,6 @@ vertical_alignment = 1
 
 [node name="ClipBarShader" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_8kwp2")
-position = Vector2(2.08165e-12, 2.08165e-12)
-scale = Vector2(2, 500)
+position = Vector2(2.08165e-12, 300)
+scale = Vector2(1, 250)
 texture = SubResource("GradientTexture1D_n2vf6")
