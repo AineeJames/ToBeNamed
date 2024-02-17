@@ -14,6 +14,7 @@ func emit_flash():
 func set_flash_angle(angle):
 	Smoke.direction = Vector2(1*cos(angle + PI), 1*sin(angle + PI))
 	Fire.direction = Vector2(1*cos(angle + PI), 1*sin(angle + PI))
+	Flash.rotation = angle - PI / 2
 
 func _process(delta):
 	if smoke_done and fire_done:

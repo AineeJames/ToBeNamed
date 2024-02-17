@@ -6,44 +6,44 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_t6tkh"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="Curve" id="Curve_wqgge"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.310345, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Gradient" id="Gradient_oip8t"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="Curve" id="Curve_edhyb"]
-min_value = -1.0
-_data = [Vector2(0, -1), 0.0, 2.0, 0, 1, Vector2(1, 1), 2.0, 0.0, 1, 0]
-point_count = 2
 
 [node name="DamageStat" type="Node2D"]
 z_index = 4096
 script = ExtResource("1_u44ti")
-crit_color = Color(0.0313726, 0.67451, 0.678431, 1)
+noncrit_color = Color(1, 1, 1, 1)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(30, 30)
+size = Vector2i(40, 30)
 
 [node name="DamageLabel" type="Label" parent="SubViewport"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.627451, 0.054902, 0.109804, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+offset_left = 5.0
+offset_right = 45.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("1_7hon4")
-theme_override_font_sizes/font_size = 7
-text = "-25"
+theme_override_font_sizes/font_size = 5
+text = "-1234.0"
 
 [node name="DamgeParticle" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 1
+lifetime = 2.0
 one_shot = true
 texture = SubResource("ViewportTexture_t6tkh")
 direction = Vector2(2.08165e-12, -1)
 gravity = Vector2(2.08165e-12, 100)
 initial_velocity_min = 80.0
 initial_velocity_max = 80.0
+scale_amount_curve = SubResource("Curve_wqgge")
 color_ramp = SubResource("Gradient_oip8t")
-hue_variation_max = 0.1
-hue_variation_curve = SubResource("Curve_edhyb")
 
 [connection signal="finished" from="DamgeParticle" to="." method="_on_damge_particle_finished"]
