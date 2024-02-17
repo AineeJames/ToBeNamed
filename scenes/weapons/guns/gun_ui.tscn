@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://blaui3jvjaj6s"]
+[gd_scene load_steps=7 format=3 uid="uid://blaui3jvjaj6s"]
 
 [ext_resource type="Script" path="res://scenes/weapons/guns/gun_ui.gd" id="1_f6al3"]
 [ext_resource type="FontFile" uid="uid://dplpohbesep78" path="res://global_assets/fonts/Pixeled.ttf" id="1_xo0hn"]
-[ext_resource type="Texture2D" uid="uid://i1vva8h4y2v2" path="res://scenes/weapons/images/circle_progress.png" id="2_h5iwm"]
 [ext_resource type="Shader" path="res://scenes/weapons/guns/gun_clip_shader.gdshader" id="4_ukcw2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8kwp2"]
@@ -40,40 +39,6 @@ theme_override_fonts/font = ExtResource("1_xo0hn")
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -250.0
-offset_right = 250.0
-offset_bottom = 250.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="ReloadingProgressBar" type="TextureProgressBar" parent="CenterContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-step = 0.01
-value = 50.0
-fill_mode = 5
-texture_progress = ExtResource("2_h5iwm")
-tint_progress = Color(1, 1, 1, 0.219608)
-
-[node name="ClipBar" type="TextureProgressBar" parent="CenterContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-value = 50.0
-fill_mode = 5
-texture_progress = ExtResource("2_h5iwm")
-tint_progress = Color(1, 1, 1, 0.529412)
 
 [node name="ClipBarShader" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_8kwp2")
