@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1mlg4bjr8sat"]
+[gd_scene load_steps=8 format=3 uid="uid://c1mlg4bjr8sat"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_0yqis"]
 [ext_resource type="PackedScene" uid="uid://djbg4wm6jn0br" path="res://scenes/map/first_map/first_map.tscn" id="1_jpbu3"]
@@ -12,6 +12,20 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1307, -1034, 507, -1065, 3380, -1236, 3222, 1947, 497, 2070, -1116, 1939)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 83.64
+
+[sub_resource type="Environment" id="Environment_6u621"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 5.81
+glow_intensity = 4.59
+glow_hdr_threshold = 0.0
+fog_light_energy = 8.53
+fog_sun_scatter = 4.4
+fog_density = 1.525
+fog_height = -1024.0
+fog_height_density = -0.095
+volumetric_fog_density = 1.4115
+adjustment_enabled = true
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_0yqis")
@@ -27,7 +41,11 @@ wait_time = 2.5
 autostart = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 position = Vector2(0, -2)
 navigation_polygon = SubResource("NavigationPolygon_cf176")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6u621")
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

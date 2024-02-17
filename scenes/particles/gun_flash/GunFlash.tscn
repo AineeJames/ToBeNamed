@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0xcvlfja7nlv"]
+[gd_scene load_steps=9 format=3 uid="uid://c0xcvlfja7nlv"]
 
-[ext_resource type="Texture2D" uid="uid://bxwi628jjmo2q" path="res://scenes/particles/textures/smoke.png" id="1_7bax5"]
 [ext_resource type="Script" path="res://scenes/particles/gun_flash/GunFlash.gd" id="1_p24iu"]
+[ext_resource type="Texture2D" uid="uid://bt5wyjyammm1m" path="res://scenes/particles/textures/PNG (Transparent)/smoke_03.png" id="2_d1klu"]
+[ext_resource type="Texture2D" uid="uid://c5asd1xlb0lpt" path="res://scenes/particles/textures/PNG (Transparent)/flame_01.png" id="3_kpgl1"]
+[ext_resource type="Texture2D" uid="uid://c5vuufi3cr4u2" path="res://scenes/particles/textures/PNG (Transparent)/muzzle_01.png" id="3_uf3gf"]
 [ext_resource type="Script" path="res://scenes/particles/gun_flash/Flash.gd" id="3_vkcuw"]
 
 [sub_resource type="Curve" id="Curve_bxhec"]
@@ -12,8 +14,8 @@ point_count = 2
 colors = PackedColorArray(0.419813, 0.419813, 0.419813, 1, 1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_f06dx"]
-offsets = PackedFloat32Array(0, 0.52381, 0.885057, 1)
-colors = PackedColorArray(0.780392, 0.658824, 0, 1, 0.687789, 0.340334, 0.133211, 1, 0.877884, 0.255369, 0.283964, 1, 0.652155, 0.286034, 0.231504, 1)
+offsets = PackedFloat32Array(0, 0.241379, 0.422003, 1)
+colors = PackedColorArray(0.944188, 0.798784, 5.09417e-07, 1, 0.951675, 0.593793, 0.406503, 1, 0.636613, 0.144405, 0.177296, 1, 0.652155, 0.286034, 0.231504, 1)
 
 [node name="GunFlash" type="Node2D"]
 scale = Vector2(0.5, 0.5)
@@ -27,10 +29,11 @@ autostart = true
 [node name="SmokeParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 3
-lifetime = 0.1
+lifetime = 0.3
 one_shot = true
 explosiveness = 0.8
-texture = ExtResource("1_7bax5")
+randomness = 0.5
+texture = ExtResource("2_d1klu")
 direction = Vector2(1, 2.08165e-12)
 spread = 30.0
 gravity = Vector2(2.08165e-12, 2.08165e-12)
@@ -46,10 +49,11 @@ color_ramp = SubResource("Gradient_t07mo")
 [node name="FireParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 3
-lifetime = 0.1
+lifetime = 0.2
 one_shot = true
 explosiveness = 0.8
-texture = ExtResource("1_7bax5")
+randomness = 0.5
+texture = ExtResource("3_kpgl1")
 direction = Vector2(1, 2.08165e-12)
 spread = 15.0
 gravity = Vector2(2.08165e-12, 2.08165e-12)
@@ -57,16 +61,17 @@ initial_velocity_min = 800.0
 initial_velocity_max = 800.0
 angle_min = -261.8
 angle_max = 237.3
-scale_amount_min = 0.01
-scale_amount_max = 0.01
+scale_amount_min = 0.02
+scale_amount_max = 0.02
 scale_amount_curve = SubResource("Curve_bxhec")
 color_ramp = SubResource("Gradient_f06dx")
 
 [node name="Flash" type="PointLight2D" parent="."]
+rotation = 1.5708
 scale = Vector2(0.05, 0.05)
-color = Color(0.984314, 0.960784, 0.745098, 1)
+color = Color(0.768627, 0.384314, 0, 1)
 energy = 4.0
-texture = ExtResource("1_7bax5")
+texture = ExtResource("3_uf3gf")
 texture_scale = 0.05
 script = ExtResource("3_vkcuw")
 

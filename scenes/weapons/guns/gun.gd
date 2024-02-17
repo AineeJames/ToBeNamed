@@ -21,10 +21,9 @@ var prev_position: Vector2
 var bullets_remaining: int
 var can_shoot = true
 var fire_held = false
+var reloading = false
 
 func _ready():
-	
-	
 		
 	FireSoundPlayer.stream = selected_gun.fire_sound
 	
@@ -40,23 +39,17 @@ func _ready():
 		GunSprite.flip_v = true
 	else:
 		GunSprite.flip_v = false
-	GunUI.offset_rotation()
-	
+	GunUI.rotation_offset = rotation
 	
 	prev_position = global_position
 	
-	GunUI.set_reloading_bar_range(0, selected_gun.reload_time)
 	GunUI.set_clip_bar_range(0, selected_gun.clip_size)
 	if !is_ai_gun:
 		GunUI.visible = true
-	
-	
 
 func _physics_process(delta):
 	velocity = (global_position - prev_position) / delta
 	prev_position = global_position
-	GunUI.update_reloading_bar_value(ReloadTimer.time_left)
-	GunUI.update_clip_bar_value(bullets_remaining)
 	GunUI.update_bullets_remaining(bullets_remaining)
 	GunUI.rotation_offset = rotation
 	if fire_held and can_shoot and bullets_remaining > 0:
@@ -69,6 +62,17 @@ func _physics_process(delta):
 		GunSprite.flip_v = true
 	else:
 		GunSprite.flip_v = false
+	if reloading:
+		GunUI.is_reloading(true)
+		var elapsed_reload_time = selected_gun.reload_time - ReloadTimer.time_left
+		var percent_done_reloading = elapsed_reload_time / selected_gun.reload_time
+		print("reload_time: ", selected_gun.reload_time)
+		print("elapsed: ", elapsed_reload_time)
+		print("percent: ", percent_done_reloading * 100, "%")
+		GunUI.update_clip_bar_value(selected_gun.clip_size * percent_done_reloading)
+	else:
+		GunUI.is_reloading(false)
+		GunUI.update_clip_bar_value(bullets_remaining)
 	
 
 func _input(event):
@@ -81,7 +85,6 @@ func _input(event):
 		fire_held = false
 		
 	if bullets_remaining > 0 and event.is_action_pressed("reload"):
-		GunUI.show_reloading()
 		bullets_remaining = 0
 		ReloadTimer.start(selected_gun.reload_time)
 	
@@ -92,9 +95,9 @@ func _input(event):
 		
 		
 func _on_reload_timer_timeout():
+	reloading = false
 	ReloadSoundPlayer.stop()
 	bullets_remaining = selected_gun.clip_size
-	GunUI.show_clip()
 
 func _on_fire_rate_timer_timeout():
 	can_shoot = true
@@ -136,9 +139,9 @@ func fire_bullet():
 	
 	bullets_remaining -= 1
 	if bullets_remaining == 0:
+		reloading = true
 		ReloadSoundPlayer.stream = selected_gun.reload_sound
 		ReloadSoundPlayer.play(0)
-		GunUI.show_reloading()
 		ReloadTimer.start(selected_gun.reload_time)
 	else:
 		if selected_gun.rechamber_sound:

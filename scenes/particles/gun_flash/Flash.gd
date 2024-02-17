@@ -1,9 +1,13 @@
 extends PointLight2D
 
-func _ready():
-	scale = Vector2.ONE * randf_range(0.3, 1.0)
-	rotation_degrees = randf_range(0, 360)
-	energy = randf_range(3, 4)
+const flashes = [
+	"res://scenes/particles/textures/PNG (Transparent)/muzzle_01.png",
+]
 
-func _process(delta):
-	energy -= 0.01
+func _ready():
+	var flashes = []
+	for i in [1, 2, 3, 4, 5]:
+		flashes.append("res://scenes/particles/textures/PNG (Transparent)/muzzle_0%s.png"%i)
+	texture = load(flashes.pick_random())
+	scale = Vector2.ONE * randf_range(0.3, 1.0)
+	energy = randf_range(3, 4)

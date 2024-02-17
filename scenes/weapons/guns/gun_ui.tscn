@@ -1,8 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://blaui3jvjaj6s"]
+[gd_scene load_steps=8 format=3 uid="uid://blaui3jvjaj6s"]
 
 [ext_resource type="Script" path="res://scenes/weapons/guns/gun_ui.gd" id="1_f6al3"]
 [ext_resource type="FontFile" uid="uid://dplpohbesep78" path="res://global_assets/fonts/Pixeled.ttf" id="1_xo0hn"]
 [ext_resource type="Texture2D" uid="uid://i1vva8h4y2v2" path="res://scenes/weapons/images/circle_progress.png" id="2_h5iwm"]
+[ext_resource type="Shader" path="res://scenes/weapons/guns/gun_clip_shader.gdshader" id="4_ukcw2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8kwp2"]
+shader = ExtResource("4_ukcw2")
+shader_parameter/inner_radius = 0.45
+shader_parameter/outer_radius = 0.5
+shader_parameter/num_bullets = 7
+shader_parameter/clip_size = 10
+shader_parameter/circle_color = Color(1, 1, 1, 0.8)
+shader_parameter/circle_reloading_color = Color(1, 1, 1, 0.3)
+shader_parameter/circle_bg_color = Color(1, 1, 1, 0.1)
+shader_parameter/margin = 0.35
+shader_parameter/is_reloading = false
+
+[sub_resource type="Gradient" id="Gradient_ofeof"]
+offsets = PackedFloat32Array(0, 0.00810373)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n2vf6"]
+gradient = SubResource("Gradient_ofeof")
 
 [node name="GunUI" type="Control"]
 layout_mode = 3
@@ -18,11 +37,12 @@ offset_top = -429.7
 offset_right = -92.6712
 offset_bottom = -149.7
 theme_override_fonts/font = ExtResource("1_xo0hn")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -54,3 +74,9 @@ value = 50.0
 fill_mode = 5
 texture_progress = ExtResource("2_h5iwm")
 tint_progress = Color(1, 1, 1, 0.529412)
+
+[node name="ClipBarShader" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8kwp2")
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(2, 500)
+texture = SubResource("GradientTexture1D_n2vf6")
