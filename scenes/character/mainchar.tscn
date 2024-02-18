@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdv3cai5ckpty"]
+[gd_scene load_steps=15 format=3 uid="uid://bdv3cai5ckpty"]
 
 [ext_resource type="Script" path="res://scenes/character/mainChar.gd" id="1_jpglg"]
 [ext_resource type="Resource" uid="uid://dvhijnemddesv" path="res://scenes/weapons/guns/pistol/pistol.tres" id="3_bob78"]
@@ -10,12 +10,34 @@
 [ext_resource type="Texture2D" uid="uid://bqc76v5snlskm" path="res://scenes/character/assets/images/rebel_guy.png" id="6_idhet"]
 [ext_resource type="FontFile" uid="uid://dplpohbesep78" path="res://global_assets/fonts/Pixeled.ttf" id="7_wib8x"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30d40"]
+bg_color = Color(0, 0, 0, 0.831373)
+
+[sub_resource type="Gradient" id="Gradient_fbbwy"]
+colors = PackedColorArray(0.486275, 0, 0, 1, 0.784314, 0, 0.12549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0myjg"]
+gradient = SubResource("Gradient_fbbwy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8wa61"]
+texture = SubResource("GradientTexture1D_0myjg")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwdvw"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 platform_floor_layers = 0
 script = ExtResource("1_jpglg")
 guns = Array[Resource("res://scenes/weapons/guns/GunResource.gd")]([ExtResource("3_bob78"), ExtResource("5_o7mdb"), ExtResource("5_sgqvx"), ExtResource("5_l2itq"), ExtResource("6_6csg7")])
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="."]
+offset_left = -19.0
+offset_top = 41.0
+offset_right = 21.0
+offset_bottom = 46.0
+theme_override_styles/background = SubResource("StyleBoxFlat_30d40")
+theme_override_styles/fill = SubResource("StyleBoxTexture_8wa61")
+value = 40.0
+show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vwdvw")

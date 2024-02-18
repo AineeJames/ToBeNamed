@@ -23,6 +23,7 @@ var Gun
 @onready var PlayerSprite = $PlayerSprite
 @onready var DashTimer = $DashTimer
 @onready var PlayerCollision = $CollisionShape2D
+@onready var PlayerHealthBar = $PlayerHealthBar
 @onready var GunScene = load("res://scenes/weapons/guns/gun.tscn")
 
 var total_damage = 0
@@ -60,6 +61,8 @@ func _input(event):
 
 func _ready():
 	create_gun()
+	PlayerHealthBar.max_value = health
+	PlayerHealthBar.value = health
 	player_initial_scale = PlayerSprite.scale
 	GlobalEventBus.updated_dps.connect(update_dps_label)
 	GlobalEventBus.updated_killcount.connect(update_killcount_label)
@@ -103,13 +106,13 @@ func _physics_process(delta):
 		DashTimer.start()
 
 	move_and_slide()
-	
 
 	position_gun()
 
 func took_damage(amount, bump_vector):
 	print("took ", amount , "damage")
 	health -= amount
+	PlayerHealthBar.value = health
 	if health < 0:
 		print("Deaded :(")
 

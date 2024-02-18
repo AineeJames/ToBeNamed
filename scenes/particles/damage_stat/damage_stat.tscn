@@ -40,9 +40,10 @@ lifetime = 2.0
 one_shot = true
 texture = SubResource("ViewportTexture_t6tkh")
 direction = Vector2(2.08165e-12, -1)
-gravity = Vector2(2.08165e-12, 100)
-initial_velocity_min = 80.0
-initial_velocity_max = 80.0
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
 scale_amount_curve = SubResource("Curve_wqgge")
 color_ramp = SubResource("Gradient_oip8t")
 

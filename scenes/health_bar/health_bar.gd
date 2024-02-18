@@ -8,6 +8,7 @@ extends Node2D
 @onready var HealthBar = $HBoxContainer/VBoxContainer/CenterContainer/ProgressBar
 @onready var NameLabel = $HBoxContainer/VBoxContainer/Label
 @onready var Percent = $HBoxContainer/PercentLabel
+@onready var ProgressBar2 = $HBoxContainer/VBoxContainer/ProgressBar2
 
 func _physics_process(delta):
 	if VisibilityTimer.time_left < health_bar_fade_time:
