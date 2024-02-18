@@ -3,7 +3,7 @@ extends Node
 signal did_damage(amount)
 signal player_did_crit()
 signal enemy_killed()
-signal enemy_spawned()
+signal enemy_spawned(spawn_time)
 
 signal updated_dps(dps)
 signal updated_killcount(killcount)
@@ -19,6 +19,7 @@ const dps_calc_delay = 0.25
 var DpsCalcTimer: Timer
 var damage_per_second: int = 0
 var enemies_alive: int = 0
+var enemy_spawn_time: float = 0
 
 var DamageValues: PackedInt32Array
 var Timestamps: PackedInt32Array
@@ -84,5 +85,6 @@ func _on_enemy_killed():
 	updated_killcount.emit(kill_count)
 	enemies_alive -= 1
 
-func _on_enemy_spawned():
+func _on_enemy_spawned(spawn_time):
 	enemies_alive += 1
+	enemy_spawn_time = spawn_time

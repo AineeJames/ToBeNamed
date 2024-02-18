@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var player = $Player
+@onready var EnemyTimer = $EnemyTimer
 var enemy_scene = load("res://scenes/enemy/enemy.tscn")
 
 var default_enemy_resource: EnemyResource = load("res://scenes/enemy/DefaultEnemy.tres")
@@ -12,7 +13,7 @@ func _ready():
 	pass # Replace with function body.
 
 func spawn_enemy():
-	GlobalEventBus.enemy_spawned.emit()
+	GlobalEventBus.enemy_spawned.emit(EnemyTimer.wait_time)
 	print("Spawning enemy")
 	var spawn_position = pick_spawn_location()
 	var enemy = enemy_scene.instantiate()
@@ -50,3 +51,4 @@ func pick_spawn_location() -> Vector2:
 
 func _on_enemy_timer_timeout():
 	spawn_enemy()
+	EnemyTimer.start(EnemyTimer.wait_time - 0.1)

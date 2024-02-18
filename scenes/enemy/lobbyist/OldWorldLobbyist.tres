@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("2_2v6mf")
-Health = 100
+Health = 200
 MoveSpeed = 100
 MaxMoveSpeed = 100
-AttackCooldown = 1
+AttackCooldown = 0.5
 EnemySprite = ExtResource("1_pylm8")
 AttackRadius = 4
+AttackPower = 20

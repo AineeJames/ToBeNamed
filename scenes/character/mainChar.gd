@@ -129,8 +129,9 @@ func update_damage_label(damage):
 	total_damage += damage
 	%TotalDamageLabel.text = "Total Damage: " + str(total_damage)
 
-func update_enemies_label():
+func update_enemies_label(spawn_time):
 	%EnemiesAliveLabel.text = "Enemies Alive: " + str(GlobalEventBus.enemies_alive)
+	%EnemiesSpawnTimeLabel.text = "Spawn Time: " + str(GlobalEventBus.enemy_spawn_time)
 	
 func update_fps_label():
 	%FPSLabel.text = "FPS: " + str(Engine.get_frames_per_second())

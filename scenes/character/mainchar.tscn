@@ -104,6 +104,13 @@ theme_override_fonts/font = ExtResource("7_wib8x")
 theme_override_font_sizes/font_size = 20
 text = "Enemies Alive: 0"
 
+[node name="EnemiesSpawnTimeLabel" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_wib8x")
+theme_override_font_sizes/font_size = 20
+text = "Enemies Spawn Time: 0"
+
 [node name="SelectedWeaponName" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
