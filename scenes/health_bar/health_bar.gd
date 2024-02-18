@@ -9,7 +9,7 @@ extends Node2D
 @onready var NameLabel = $HBoxContainer/VBoxContainer/Label
 @onready var Percent = $HBoxContainer/PercentLabel
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if VisibilityTimer.time_left < health_bar_fade_time:
 		modulate.a = VisibilityTimer.time_left / health_bar_fade_time
 	else:
@@ -30,6 +30,6 @@ func set_max_health(value):
 func set_health(value):
 	HealthBar.value = value
 	
-func set_label(str):
-	NameLabel.text = str
+func set_label(msg):
+	NameLabel.text = msg
 	

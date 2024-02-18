@@ -76,9 +76,7 @@ func _physics_process(delta):
 	if !NavAgent.is_navigation_finished():
 		movement_delta = speed * delta
 		
-		var current_agent_position = global_position
 		var next_path_position = NavAgent.get_next_path_position()
-		#velocity = (next_path_position - current_agent_position).normalized() * movement_delta
 		var new_velocity: Vector2 = global_position.direction_to(next_path_position) * movement_delta
 		if NavAgent.avoidance_enabled:
 			NavAgent.set_velocity(new_velocity)

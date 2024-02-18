@@ -1,9 +1,5 @@
 extends PointLight2D
 
-const flashes = [
-	"res://scenes/particles/textures/PNG (Transparent)/muzzle_01.png",
-]
-
 func _ready():
 	var flashes = []
 	for i in [1, 2, 3, 4, 5]:

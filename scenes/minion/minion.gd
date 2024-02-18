@@ -17,7 +17,7 @@ func set_gun_target_position(pos: Vector2):
 	Gun.look_at(global_position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var potential_targets = Attack_Area.get_overlapping_bodies()
 	var closest_enemy = null
 	var closest_distance = INF # Use infinity as the initial comparison value

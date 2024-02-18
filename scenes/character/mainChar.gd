@@ -109,7 +109,7 @@ func _physics_process(delta):
 
 	position_gun()
 
-func took_damage(amount, bump_vector):
+func took_damage(amount, _bump_vector):
 	print("took ", amount , "damage")
 	health -= amount
 	PlayerHealthBar.value = health
@@ -129,7 +129,7 @@ func update_damage_label(damage):
 	total_damage += damage
 	%TotalDamageLabel.text = "Total Damage: " + str(total_damage)
 
-func update_enemies_label(spawn_time):
+func update_enemies_label(_spawn_time):
 	%EnemiesAliveLabel.text = "Enemies Alive: " + str(GlobalEventBus.enemies_alive)
 	%EnemiesSpawnTimeLabel.text = "Spawn Time: " + str(GlobalEventBus.enemy_spawn_time)
 	
